@@ -1,15 +1,16 @@
 package app.service;
 
-import app.exception.EmailAlreadyExistsException;
-import app.exception.PasswordMismatchException;
-import app.exception.UsernameAlreadyExistsException;
+import app.exception.*;
 import app.mapper.UserMapper;
 import app.model.dto.user.UserDTO;
+import app.model.dto.user.UserLoginRequest;
 import app.model.dto.user.UserRegisterRequest;
 import app.model.entity.User;
 import app.repository.UserRepository;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import java.util.Optional;
 
 @Service
 public class UserService {
@@ -45,5 +46,21 @@ public class UserService {
         User saved = userRepository.save(user);
 
         return userMapper.toUserDTO(saved);
+    }
+
+    public UserDTO login(UserLoginRequest userLoginRequest) {
+
+        User user = userRepository.findByUsername(userLoginRequest.getUsername())
+                .orElseThrow(InvalidUsernameOrPasswordException::new);
+
+        if(!user.isActive()) {
+            throw new UserInactiveException();
+        }
+
+        if (!passwordEncoder.matches(userLoginRequest.getPassword(), user.getPassword())) {
+            throw new InvalidUsernameOrPasswordException();
+        }
+
+        return userMapper.toUserDTO(user);
     }
 }
