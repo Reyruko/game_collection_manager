@@ -19,7 +19,6 @@ public class UserDTO {
     private String username;
     private String gamerTag;
     private String email;
-    private String password;
     private UserRole role;
     private String profilePicture;
     private boolean isActive;
