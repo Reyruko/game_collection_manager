@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class UserRegisterDTO {
+public class UserRegisterRequest {
 
     @NotBlank
     @Size(min = 3, message = "Username must be at least 3 characters")
