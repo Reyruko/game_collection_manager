@@ -1,0 +1,158 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    background-size:cover;
+    background-position:center;
+    height:100vh;
+    color:#d8b06d;
+    font-family: Georgia, serif;
+}
+
+body{
+    background:
+            linear-gradient(
+                    rgba(0,0,0,.45),
+                    rgba(0,0,0,.85)
+            ),
+
+            url("../images/cave-bg.png");
+}
+
+header{
+    padding:40px 80px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.brand{
+    display:flex;
+    align-items:center;
+    gap:15px;
+
+    text-decoration:none;
+    color:inherit;
+
+    transition:0.2s ease;
+}
+
+.brand:hover{
+    transform:scale(1.02);
+}
+
+.logo-img{
+    width:70px;
+    height:auto;
+}
+
+.brand-text h2,
+.brand-text p{
+    color:#ddb57a;
+    margin:0;
+}
+
+nav{
+    display:flex;
+    gap:40px;
+    align-items:center;
+}
+
+nav a{
+    text-decoration:none;
+    color:#ddb57a;
+}
+
+.login{
+    padding:15px 35px;
+    border:1px solid #8b6b3e;
+    border-radius:10px;
+}
+
+.register{
+    background:#c59a5f;
+    padding:15px 35px;
+    border-radius:10px;
+    color:black;
+}
+
+.hero{
+    display:flex;
+    justify-content:space-between;
+    padding:80px;
+}
+
+.hero-content{
+    width:500px;
+}
+
+h1{
+    font-size:69px;
+    line-height:.95;
+}
+
+.hero p{
+    margin-top:30px;
+    font-size:22px;
+    color:#aaa;
+}
+
+.actions{
+    display:flex;
+    gap:20px;
+    margin-top:40px;
+}
+
+button{
+    padding: 17px 40px;
+    border: none;
+    cursor: pointer;
+    font-size: 17px;
+    border-radius: 12px;
+
+}
+
+.gold{
+    background:#c89a55;
+}
+
+.dark{
+    background:transparent;
+    color:white;
+    border:1px solid #987442;
+}
+
+.center-chest{
+    display:flex;
+    align-items:center;
+}
+
+.center-chest img{
+    width:350px;
+    filter:
+            drop-shadow(
+                    0 0 50px
+                    gold
+            );
+}
+
+.features{
+    position:absolute;
+    bottom:30px;
+    left:50%;
+    transform:translateX(-50%);
+    display:flex;
+    gap:80px;
+}
+
+.features div{
+    text-align:center;
+    width:180px;
+}
+
+.features h3{
+    margin:15px 0;
+}
