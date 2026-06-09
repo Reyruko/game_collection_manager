@@ -1,6 +1,8 @@
 package app.model.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 import lombok.*;
 
 import java.time.LocalDateTime;
@@ -18,8 +20,12 @@ public class Achievement {
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
+    @NotBlank
+    @Size(min=2,max=100)
     private String name;
 
+    @NotBlank
+    @Size(min=2,max=500)
     private String description;
 
     private boolean unlocked;
@@ -27,11 +33,20 @@ public class Achievement {
     private LocalDateTime unlockedOn;
 
     @ManyToOne
-    @JoinColumn(name = "game_id")
+    @JoinColumn(nullable = false)
     private Game game;
 
     private LocalDateTime createdOn;
-
     private LocalDateTime updatedOn;
+
+    @PrePersist
+    public void prePersist() {
+        createdOn = LocalDateTime.now();
+    }
+
+    @PreUpdate
+    public void preUpdate() {
+        updatedOn = LocalDateTime.now();
+    }
 
 }

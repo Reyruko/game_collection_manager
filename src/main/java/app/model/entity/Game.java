@@ -45,6 +45,7 @@ public class Game {
     @Enumerated(EnumType.STRING)
     private Platform platform;
 
+    @Digits(integer = 5, fraction = 1)
     @DecimalMin("0.0")
     private BigDecimal hoursPlayed;
 
@@ -57,15 +58,23 @@ public class Game {
     @Enumerated(EnumType.STRING)
     private GameStatus status;
 
-    private boolean isFavorite;
+    private boolean favorite;
 
     @ManyToOne
     @JoinColumn(nullable = false)
     private User owner;
 
     private LocalDate purchaseDate;
-
     private LocalDateTime createdOn;
-
     private LocalDateTime updatedOn;
+
+    @PrePersist
+    public void prePersist() {
+        createdOn = LocalDateTime.now();
+    }
+
+    @PreUpdate
+    public void preUpdate() {
+        updatedOn = LocalDateTime.now();
+    }
 }
