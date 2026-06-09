@@ -1,0 +1,237 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+header{
+    padding:40px 80px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.brand{
+    display:flex;
+    align-items:center;
+    gap:15px;
+
+    text-decoration:none;
+    color:inherit;
+
+    transition:0.2s ease;
+}
+
+.brand:hover{
+    transform:scale(1.02);
+}
+
+.logo-img{
+    width:70px;
+    height:auto;
+}
+
+.brand-text h2,
+.brand-text p{
+    color:#ddb57a;
+    margin:0;
+}
+
+nav{
+    display:flex;
+    gap:40px;
+    align-items:center;
+}
+
+nav a{
+    text-decoration:none;
+    color:#ddb57a;
+}
+
+.background-chest {
+    inset: 0;
+    background-image: url("static/images/chest.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    transition:
+            transform .8s ease,
+            opacity .5s ease;
+    z-index: -3;
+}
+
+.background-chest.opened {
+    background-image: url('static/images/chest-opened.png');
+    transform: scale(1.02);
+}
+
+.login-container {
+
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    position: relative;
+    z-index: 2;
+}
+
+.title {
+    font-family: 'Cinzel', serif;
+    font-size: 4rem;
+    color: #f7d774;
+    text-shadow: 0 0 15px rgba(247,215,116,.4);
+}
+
+.subtitle {
+    text-align: center;
+    margin-top: .5rem;
+    color: rgba(255,255,255,.85);
+    font-size: 1.05rem;
+}
+
+.auth-card {
+    width: 430px;
+    background: rgba(10,10,10,.65);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(247,215,116,.18);
+    border-radius: 20px;
+    padding: 2rem;
+    box-shadow: 0 20px 60px rgba(0,0,0,.45);
+}
+
+.tab-buttons {
+    display: flex;
+    gap: .5rem;
+    margin-bottom: 1.5rem;
+}
+
+.tab {
+    flex: 1;
+    border: none;
+    padding: .9rem;
+    border-radius: 12px;
+    cursor: pointer;
+    background: rgba(255,255,255,.05);
+    color: white;
+    transition: .25s ease;
+}
+
+.tab.active {
+    background: rgba(247,215,116,.18);
+    color: #f7d774;
+}
+
+.auth-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.hidden {
+    display: none;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: .4rem;
+}
+
+.form-group label {
+    font-size: .9rem;
+}
+
+.form-group input {
+    padding: 1rem;
+    border-radius: 12px;
+    border: 1px solid rgba(255,255,255,.08);
+    background: rgba(255,255,255,.04);
+    color: white;
+    transition: .2s ease;
+}
+
+.form-group input:focus {
+    outline: none;
+    border-color: #f7d774;
+    box-shadow: 0 0 0 3px rgba(247,215,116,.15);
+}
+
+.primary-btn {
+    margin-top: .5rem;
+    border: none;
+    padding: 1rem;
+    border-radius: 12px;
+    cursor: pointer;
+    font-weight: 600;
+    background:
+            linear-gradient(
+                    135deg,
+                    #f7d774,
+                    #d4af37
+            );
+    color: #111;
+    transition:
+            transform .2s ease,
+            box-shadow .2s ease;
+}
+
+.primary-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(212,175,55,.3);
+}
+
+.message {
+    margin-top: 1rem;
+    padding: .8rem;
+    border-radius: 10px;
+}
+
+form .error{
+    margin-top:-15px;
+    color:#ab1313;
+    font-size:15px;
+}
+
+.success {
+    background: rgba(0,255,100,.15);
+}
+
+body.golden-transition::before {
+
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: 999;
+    pointer-events: none;
+    background:
+            radial-gradient(
+                    circle,
+                    rgba(255,223,120,.8),
+                    rgba(255,223,120,.2),
+                    transparent
+            );
+    animation: flash 1s ease forwards;
+}
+
+@keyframes flash {
+    0% {
+        opacity: 0;
+    }
+    30% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+
+@media (max-width: 768px) {
+    .title {
+        font-size: 2.5rem;
+    }
+    .auth-card {
+        width: 90%;
+    }
+}

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>TGV | Login</title>
+    <link rel="stylesheet" th:href="@{/css/auth.css}">
+    <link rel="stylesheet" th:href="@{/css/login.css}">
+</head>
+
+<body>
+<header>
+    <a th:href="@{/}" class="brand">
+        <img th:src="@{/images/tgv-logo.png}"
+             alt="The Game Vault logo"
+             class="logo-img">
+
+        <div class="brand-text">
+            <h2>THE GAME VAULT</h2>
+            <p>Your adventure. Your collection.</p>
+        </div>
+    </a>
+    <nav>
+        <a href="#">Features</a>
+        <a href="#">About</a>
+        <a href="#">Contact</a>
+        <a th:href="@{/register}" class="register">
+            REGISTER
+        </a>
+    </nav>
+
+</header>
+
+<div class="main.login">
+    <div class="auth">
+        <form th:action="@{/login}"
+          method="post">
+         <h2>Enter The Vault</h2>
+
+            <input name="username"
+                   placeholder="Username">
+
+            <input type="password"
+                   name="password"
+                   placeholder="Password">
+
+            <button>
+            OPEN CHEST
+            </button>
+
+            <div class="error" th:if="${error}">
+                <span th:text="${error}"></span>
+            </div>
+        </form>
+    </div>
+</div>
+
+</body>
+
+</html>
