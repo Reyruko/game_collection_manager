@@ -18,6 +18,10 @@ public class UserRegisterRequest {
     @Size(min = 3, message = "Username must be at least 3 characters")
     private String username;
 
+    @Email
+    @NotBlank
+    private String email;
+
     @NotBlank
     @Size(min = 6, message = "Password must be at least 6 characters")
     private String password;
@@ -28,8 +32,5 @@ public class UserRegisterRequest {
     @NotBlank
     private String gamerTag;
 
-    @Email
-    @NotBlank
-    private String email;
 
 }

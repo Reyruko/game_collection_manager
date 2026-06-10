@@ -6,18 +6,21 @@ import app.model.dto.user.UserDTO;
 import app.model.dto.user.UserLoginRequest;
 import app.model.dto.user.UserRegisterRequest;
 import app.model.entity.User;
+import app.model.enums.UserRole;
 import app.repository.UserRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
+import java.time.LocalDateTime;
 
 @Service
+@Transactional
 public class UserService {
 
-    private UserRepository userRepository;
-    private PasswordEncoder passwordEncoder;
-    private UserMapper userMapper;
+    private final UserRepository userRepository;
+    private final PasswordEncoder passwordEncoder;
+    private final UserMapper userMapper;
 
     public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder,
                        UserMapper userMapper) {
@@ -27,6 +30,37 @@ public class UserService {
     }
 
     public UserDTO register(UserRegisterRequest userRegisterRequest) {
+
+        validateRegistration(userRegisterRequest);
+
+        User user = userMapper.toEntity(userRegisterRequest);
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        user.setActive(true);
+        user.setRole(UserRole.USER);
+        user.setCreatedOn(LocalDateTime.now());
+
+        User saved = userRepository.save(user);
+
+        return userMapper.toUserDTO(saved);
+    }
+
+    public UserDTO login(UserLoginRequest userLoginRequest) {
+
+        User user = userRepository.findByUsername(userLoginRequest.getUsername())
+                .orElseThrow(InvalidUsernameOrPasswordException::new);
+
+        if (!passwordEncoder.matches(userLoginRequest.getPassword(), user.getPassword())) {
+            throw new InvalidUsernameOrPasswordException();
+        }
+
+        if(!user.isActive()) {
+            throw new UserInactiveException();
+        }
+
+        return userMapper.toUserDTO(user);
+    }
+
+    private void validateRegistration(UserRegisterRequest userRegisterRequest) {
         if (userRepository.findByUsername(userRegisterRequest.getUsername()).isPresent()) {
             throw new UsernameAlreadyExistsException();
         }
@@ -39,28 +73,5 @@ public class UserService {
                 .equals(userRegisterRequest.getConfirmPassword())) {
             throw new PasswordMismatchException();
         }
-
-        User user = userMapper.toEntity(userRegisterRequest);
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
-
-        User saved = userRepository.save(user);
-
-        return userMapper.toUserDTO(saved);
-    }
-
-    public UserDTO login(UserLoginRequest userLoginRequest) {
-
-        User user = userRepository.findByUsername(userLoginRequest.getUsername())
-                .orElseThrow(InvalidUsernameOrPasswordException::new);
-
-        if(!user.isActive()) {
-            throw new UserInactiveException();
-        }
-
-        if (!passwordEncoder.matches(userLoginRequest.getPassword(), user.getPassword())) {
-            throw new InvalidUsernameOrPasswordException();
-        }
-
-        return userMapper.toUserDTO(user);
     }
 }
