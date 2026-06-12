@@ -3,101 +3,93 @@
 
 <head>
     <title>The Game Vault</title>
+    <link rel="stylesheet" th:href="@{/css/common.css}">
     <link rel="stylesheet" th:href="@{/css/index.css}">
 </head>
 
 <body>
-<header>
-    <a th:href="@{/}" class="brand">
-        <img th:src="@{/images/tgv-logo.png}"
-             alt="The Game Vault logo"
-             class="logo-img">
 
-        <div class="brand-text">
-            <h2>THE GAME VAULT</h2>
-            <p>Your adventure. Your collection.</p>
-        </div>
-    </a>
-    <nav>
-        <a href="#">Features</a>
-        <a href="#">About</a>
-        <a href="#">Contact</a>
-        <a th:href="@{/auth/register}" class="register">
-            REGISTER
-        </a>
-    </nav>
+<div class="page-container">
 
-</header>
+    <div th:insert="~{fragments/nav-bar :: header}"></div>
 
-<section class="hero">
+    <main>
 
-    <div class="hero-content">
+        <section class="hero">
 
-        <h1>
-            UNLOCK.<br>
-            MANAGE.<br>
-            EXPLORE.
-        </h1>
+            <div class="hero-content">
 
-        <p>
-            Track your game library,
-            unlock achievements
-            and build your vault.
-        </p>
+                <h1>
+                    UNLOCK.<br>
+                    MANAGE.<br>
+                    EXPLORE.
+                </h1>
 
-        <div class="actions">
+                <p>
+                    Track your game library,
+                    unlock achievements
+                    and build your vault.
+                </p>
 
-            <a th:href="@{/auth/login}">
-                <button class="gold">
-                    🔒 UNLOCK THE VAULT
-                </button>
-            </a>
+                <div class="actions">
 
-            <button class="dark">
+                    <a th:href="@{/login}">
+                        <button class="gold">
+                            🔒 UNLOCK THE VAULT
+                        </button>
+                    </a>
 
-                LEARN MORE
-            </button>
-        </div>
-    </div>
+                    <button class="dark">
+                        LEARN MORE
+                    </button>
+
+                </div>
+            </div>
+
+        </section>
+
+        <section class="features">
+
+            <div>
+                💻
+                <h3>Organize</h3>
+                <p>
+                    Manage your collection.
+                </p>
+            </div>
+
+            <div>
+                ⚔️
+                <h3>Track</h3>
+                <p>
+                    Track progress.
+                </p>
+            </div>
+
+            <div>
+                🏆
+                <h3>Achieve</h3>
+                <p>
+                    Unlock milestones.
+                </p>
+            </div>
+
+            <div>
+                🗺️
+                <h3>Explore</h3>
+                <p>
+                    Discover new adventures.
+                </p>
+            </div>
+
+        </section>
 
 
-</section>
+    </main>
 
-<section class="features">
+    <div th:insert="~{fragments/footer :: footer}"></div>
 
-    <div>
-        🪙
-        <h3>Organize</h3>
-        <p>
-            Manage your collection.
-        </p>
-    </div>
-
-    <div>
-        ⚔️
-        <h3>Track</h3>
-        <p>
-            Track progress.
-        </p>
-    </div>
-
-    <div>
-        🏆
-        <h3>Achieve</h3>
-        <p>
-            Unlock milestones.
-        </p>
-    </div>
-
-    <div>
-        🗺️
-        <h3>Explore</h3>
-        <p>
-            Discover new adventures.
-        </p>
-    </div>
-
-</section>
+</div>
 
 </body>
 
