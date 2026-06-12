@@ -1,0 +1,187 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/*html,*/
+/*body {
+    height: 100%;
+    margin: 0;
+}*/
+
+/*body {
+    min-height: 100vh;
+}*/
+
+
+
+main {
+    flex: 1;
+}
+
+.page-container {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+body{
+    background:
+            linear-gradient(
+                    rgba(0,0,0,0.65),
+                    rgba(0,0,0,0.80)
+            ),
+            url("../images/chest.png");
+}
+
+body {
+    min-height: 100vh;
+    margin: 0;
+
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    display: flex;
+    flex-direction: column;
+
+    font-family: Georgia, serif;
+}
+
+header{
+    padding:40px 80px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.brand{
+    display:flex;
+    align-items:center;
+    gap:15px;
+
+    text-decoration:none;
+    color:inherit;
+
+    transition:0.2s ease;
+}
+
+.brand:hover{
+    transform:scale(1.02);
+}
+
+.logo-img{
+    width:70px;
+    height:auto;
+}
+
+.brand-text h2,
+.brand-text p{
+    margin:0;
+}
+
+nav{
+    display:flex;
+    gap:40px;
+    align-items:center;
+}
+
+nav a{
+    text-decoration:none;
+    color:#ddb57a;
+}
+
+.login{
+    padding:15px 35px;
+    border:1px solid #8b6b3e;
+    border-radius:10px;
+}
+
+.register{
+    background:#c59a5f;
+    padding:15px 35px;
+    border-radius:10px;
+    color:black;
+}
+
+.hero{
+    display:flex;
+    justify-content:space-between;
+    padding:80px;
+}
+
+.main\.login{
+    display:flex;
+    justify-content: center;
+    align-items:center;
+    padding: 42px;
+}
+
+.auth{
+    display:flex;
+    gap:100px;
+    justify-content: center;
+    margin: 160px
+}
+
+.open{
+    transform: scale(1.15);
+    filter: drop-shadow(
+            0 0 80px
+            gold
+    );
+}
+
+form{
+    display:flex;
+    flex-direction:column;
+    gap:20px;
+    background: rgba(20,20,20,.75);
+    padding:50px;
+    border-radius:20px;
+    width:400px;
+}
+
+h2{
+    color:#d8b06d;
+}
+
+input{
+    padding:16px;
+    border-radius:10px;
+    border:none;
+}
+
+button{
+    padding:18px;
+    background:#c89a55;
+    border:none;
+    cursor:pointer;
+}
+
+.div {
+
+}
+
+.footer {
+    height: 25px;
+    background: rgba(5, 5, 5, 0.82);
+    border-top: 1px solid rgba(214, 31, 31, 0.4);
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 0 40px;
+}
+
+.copyright,
+.powered {
+    color: #cfcfcf;
+    font-size: 13px;
+}
+
+.powered {
+    color: #c89a55;
+}
