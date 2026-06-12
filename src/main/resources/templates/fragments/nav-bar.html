@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Header Fragment</title>
+</head>
+<body>
+<header th:fragment="header" class="header">
+    <a th:href="@{/}" class="brand">
+        <img th:src="@{/images/tgv-logo.png}"
+             alt="The Game Vault logo"
+             class="logo-img">
+
+        <div class="brand-text">
+            <h2>THE GAME VAULT</h2>
+            <p>Your adventure. Your collection.</p>
+        </div>
+    </a>
+    <nav>
+        <a href="#">Features</a>
+        <a href="#">About</a>
+        <a href="#">Contact</a>
+        <a th:href="@{/login}" class="login">
+            LOGIN
+        </a>
+        <a th:href="@{/register}" class="register">
+            REGISTER
+        </a>
+    </nav>
+</header>
+</body>
+</html>
