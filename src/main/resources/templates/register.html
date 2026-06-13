@@ -16,22 +16,31 @@
 
     <main class="auth">
         <form th:action="@{/register}"
+              th:object="${userRegisterRequest}"
           method="post">
 
             <h2>Create Adventurer</h2>
-            <input  name="username"
-                placeholder="Username">
+                <input  th:field="*{username}"
+                    placeholder="Username">
 
-            <input  name="email"
-                placeholder="Email">
+                <input th:field="*{email}"
+                    placeholder="Email">
 
-            <input  name="password"
-                type="password"
-                placeholder="Password">
+                <input
+                    th:field="*{gamerTag}"
+                    placeholder="Gamer Tag">
 
-            <button>
-            CLAIM TREASURE
-            </button>
+                <input
+                    type="password"
+                    th:field="*{password}"
+                    placeholder="Password">
+
+                <input
+                    type="password"
+                    th:field="*{confirmPassword}"
+                    placeholder="Confirm Password">
+
+            <button type="submit"> CLAIM TREASURE </button>
         </form>
     </main>
 

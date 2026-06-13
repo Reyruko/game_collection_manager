@@ -49,6 +49,7 @@ public class User {
     @Size(max=255)
     private String profilePicture;
 
+    @Column(name = "is_active", nullable = false)
     private boolean active;
 
     private LocalDateTime createdOn;

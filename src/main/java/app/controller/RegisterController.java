@@ -1,5 +1,7 @@
 package app.controller;
 
+import app.exception.EmailAlreadyExistsException;
+import app.exception.PasswordMismatchException;
 import app.exception.UsernameAlreadyExistsException;
 import app.model.dto.user.UserRegisterRequest;
 import app.service.UserService;
@@ -36,21 +38,28 @@ public class RegisterController {
             @Valid @ModelAttribute("userRegisterRequest") UserRegisterRequest userRegisterRequest,
             BindingResult bindingResult) {
 
-        if(bindingResult.hasErrors()) {
-            ModelAndView mv = new ModelAndView("register");
-            mv.addObject("userRegisterRequest", userRegisterRequest);
+        ModelAndView modelAndView = new ModelAndView("register");
+        modelAndView.addObject("userRegisterRequest", userRegisterRequest);
 
-            return mv;
+        if (bindingResult.hasErrors()) {
+            return modelAndView;
         }
 
         try {
             userService.register(userRegisterRequest);
 
         } catch (UsernameAlreadyExistsException e) {
-            ModelAndView modelAndView = new ModelAndView("register");
 
-            modelAndView.addObject("userRegisterRequest");
             modelAndView.addObject("usernameError", e.getMessage());
+            return modelAndView;
+
+        } catch (EmailAlreadyExistsException e) {
+            modelAndView.addObject("emailError", e.getMessage());
+
+            return modelAndView;
+
+        } catch (PasswordMismatchException e) {
+            modelAndView.addObject("passwordError", e.getMessage());
 
             return modelAndView;
         }
