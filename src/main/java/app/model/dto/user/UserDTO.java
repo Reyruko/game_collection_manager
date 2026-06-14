@@ -17,7 +17,6 @@ public class UserDTO {
 
     private UUID id;
     private String username;
-    private String gamerTag;
     private String email;
     private UserRole role;
     private String profilePicture;

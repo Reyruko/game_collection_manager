@@ -28,11 +28,6 @@ public class User {
     private String username;
 
     @NotBlank
-    @Size(min = 3, max = 30)
-    @Column(nullable = false, unique = true)
-    private String gamerTag;
-
-    @NotBlank
     @Email
     @Column(nullable = false, unique = true)
     private String email;

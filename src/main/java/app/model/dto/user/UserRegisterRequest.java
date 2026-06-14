@@ -14,23 +14,19 @@ import lombok.NoArgsConstructor;
 @Builder
 public class UserRegisterRequest {
 
-    @NotBlank
+    @NotBlank(message = "Choose your adventurer name.")
     @Size(min = 3, message = "Username must be at least 3 characters")
     private String username;
 
-    @Email
-    @NotBlank
+    @Email(message = "Enter a valid email")
+    @NotBlank(message = "Email cannot be empty!")
     private String email;
 
-    @NotBlank
+    @NotBlank(message = "Password cannot be empty!")
     @Size(min = 6, message = "Password must be at least 6 characters")
     private String password;
 
-    @NotBlank
+    @NotBlank(message = "Please confirm password!")
     private String confirmPassword;
-
-    @NotBlank
-    private String gamerTag;
-
 
 }
