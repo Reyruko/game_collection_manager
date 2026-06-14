@@ -13,6 +13,7 @@ body{
 h1{
     font-size:69px;
     line-height:.95;
+    color: #c89a55;
 }
 
 .hero p{
@@ -32,7 +33,11 @@ h1{
 }
 
 .dark{
-    background:transparent;
+    color:#ddb57a;
+    padding:15px 35px;
+    border:1px solid #8b6b3e;
+    border-radius:10px;
+    background: transparent;
 }
 
 .center-chest{
@@ -60,6 +65,7 @@ h1{
 .features div{
     text-align:center;
     width:180px;
+    color: #c89a55;
 }
 
 .features h3{

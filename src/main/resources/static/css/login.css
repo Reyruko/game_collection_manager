@@ -41,8 +41,13 @@ form{
     background:#ddb57a;
 }
 
-.error {
-    color: red;
+.error{
+    color: #d36d6d;
+    font-size:13px;
+    margin-top:-10px;
+    margin-bottom:8px;
+
+    min-height:18px;
 }
 
 @media (max-width: 768px) {
