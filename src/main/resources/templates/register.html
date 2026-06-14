@@ -5,8 +5,8 @@
 
     <meta charset="UTF-8">
     <title>TGV | Register</title>
-    <link rel="stylesheet" th:href="@{/css/common.css}">
     <link rel="stylesheet" th:href="@{/css/register.css}">
+    <link rel="stylesheet" th:href="@{/css/common.css}">
 
 </head>
 
@@ -23,24 +23,46 @@
                 <input  th:field="*{username}"
                     placeholder="Username">
 
+            <div class="error"
+                 th:if="${#fields.hasErrors('username')}"
+                 th:errors="*{username}">
+            </div>
+
                 <input th:field="*{email}"
                     placeholder="Email">
 
-                <input
-                    th:field="*{gamerTag}"
-                    placeholder="Gamer Tag">
+            <div class="error"
+                 th:if="${#fields.hasErrors('email')}"
+                 th:errors="*{email}">
+            </div>
 
                 <input
                     type="password"
                     th:field="*{password}"
                     placeholder="Password">
 
+            <div class="error"
+                 th:if="${#fields.hasErrors('password')}"
+                 th:errors="*{password}">
+            </div>
+
                 <input
                     type="password"
                     th:field="*{confirmPassword}"
                     placeholder="Confirm Password">
 
-            <button type="submit"> CLAIM TREASURE </button>
+            <div class="error"
+                 th:if="${#fields.hasErrors('confirmPassword')}"
+                 th:errors="*{confirmPassword}">
+            </div>
+
+            <div class="error"
+                 th:if="${passwordError}"
+                 th:text="${passwordError}">
+            </div>
+
+            <button type="submit" class="register-btn"> CLAIM TREASURE </button>
+
         </form>
     </main>
 
