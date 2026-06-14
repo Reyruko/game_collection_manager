@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Registration Successful</title>
+    <link rel="stylesheet" th:href="@{/css/common.css}">
+    <link rel="stylesheet" th:href="@{/css/register-success.css}">
+</head>
+
+<body>
+
+<div th:insert="~{fragments/nav-bar :: header}"></div>
+
+<main class="success-container">
+
+    <section class="success-card">
+
+        <h1>Welcome, Adventurer!</h1>
+
+        <p>
+            Your account has been forged successfully.
+            The treasure halls await.
+        </p>
+
+        <a th:href="@{/login}" class="success-btn">
+            Enter the Realm
+        </a>
+
+    </section>
+
+</main>
+
+<div th:insert="~{fragments/footer :: footer}"></div>
+
+</body>
+</html>
