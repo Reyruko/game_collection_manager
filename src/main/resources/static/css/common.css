@@ -4,18 +4,6 @@
     box-sizing: border-box;
 }
 
-/*html,*/
-/*body {
-    height: 100%;
-    margin: 0;
-}*/
-
-/*body {
-    min-height: 100vh;
-}*/
-
-
-
 main {
     flex: 1;
 }
@@ -24,15 +12,6 @@ main {
     min-height: 100vh;
     display: flex;
     flex-direction: column;
-}
-
-body{
-    background:
-            linear-gradient(
-                    rgba(0,0,0,0.65),
-                    rgba(0,0,0,0.80)
-            ),
-            url("../images/chest.png");
 }
 
 body {
@@ -115,14 +94,13 @@ nav a{
     display:flex;
     justify-content: center;
     align-items:center;
-    padding: 42px;
+    padding: 35px;
 }
 
 .auth{
     display:flex;
     gap:100px;
     justify-content: center;
-    margin: 160px
 }
 
 .open{
@@ -136,7 +114,7 @@ nav a{
 form{
     display:flex;
     flex-direction:column;
-    gap:20px;
+    gap:25px;
     background: rgba(20,20,20,.75);
     padding:50px;
     border-radius:20px;
@@ -155,13 +133,9 @@ input{
 
 button{
     padding:18px;
-    background:#c89a55;
     border:none;
     cursor:pointer;
-}
-
-.div {
-
+    border-radius:12px;
 }
 
 .footer {
@@ -184,4 +158,61 @@ button{
 
 .powered {
     color: #c89a55;
+}
+
+@media (max-width: 768px) {
+
+    header {
+        padding: 20px;
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    nav {
+        gap: 15px;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .login,
+    .register {
+        padding: 10px 20px;
+    }
+
+    .brand {
+        flex-direction: column;
+        text-align: center;
+        gap: 8px;
+    }
+
+    .logo-img {
+        width: 55px;
+    }
+
+    .hero {
+        flex-direction: column;
+        padding: 30px 20px;
+        gap: 30px;
+    }
+
+    .auth {
+        flex-direction: column;
+        gap: 30px;
+        padding: 20px;
+    }
+
+    form {
+        width: 100%;
+        max-width: 400px;
+        padding: 30px;
+    }
+
+    .footer {
+        flex-direction: column;
+        gap: 8px;
+        height: auto;
+        padding: 15px;
+        text-align: center;
+    }
+
 }
