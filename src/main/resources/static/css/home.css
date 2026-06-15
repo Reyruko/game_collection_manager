@@ -1,0 +1,97 @@
+body{
+    background: linear-gradient(
+            rgba(0,0,0,0.65),
+            rgba(0,0,0,0.80)),
+    url("../images/treasure-map.png");
+    background-size: cover;
+}
+
+body{
+    background-position: center;
+}
+
+.home{
+    flex:1;
+    display:flex;
+    flex-direction:column;
+    gap:40px;
+    padding: 40px 80px 80px;
+}
+
+.welcome{
+    background: rgba(15,15,15,.72);
+    border: 1px solid rgba(221,181,122,.15);
+    border-radius:20px;
+    padding:40px;
+    backdrop-filter: blur(10px);
+    color:#f0c97f;
+}
+
+.welcome h1{
+    font-size:48px;
+    margin-bottom:15px;
+}
+
+.welcome span{
+    color:#f0c97f;
+}
+
+.welcome p{
+    color:#aaa;
+    font-size:18px;
+}
+
+.games-library,
+.stats,
+.achievements{
+    min-height:220px;
+    background: rgba(12,12,12,.65);
+    border: 1px solid rgba(221,181,122,.10);
+    border-radius:20px;
+    padding:30px;
+    backdrop-filter: blur(8px);
+    transition:.25s;
+}
+
+.games-library:hover,
+.stats:hover,
+.achievements:hover{
+    transform:translateY(-2px);
+    border-color: rgba(221,181,122,.25);
+}
+
+.games-library::before{
+    content:"🎮 Game Library";
+}
+
+.stats::before{
+    content:"📊 Progress";
+}
+
+.achievements::before{
+    content:"🏆 Achievements";
+}
+
+.games-library::before,
+.stats::before,
+.achievements::before{
+    display:block;
+    font-size:26px;
+    margin-bottom:25px;
+    color:#ddb57a;
+}
+
+@media(max-width:768px){
+    .home{
+        padding:20px;
+        gap:25px;
+    }
+
+    .welcome{
+        padding:30px;
+    }
+
+    .welcome h1{
+        font-size:34px;
+    }
+}

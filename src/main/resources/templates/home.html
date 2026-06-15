@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>The Game Vault | Home</title>
+    <link rel="stylesheet" th:href="@{/css/common.css}">
+    <link rel="stylesheet" th:href="@{/css/home.css}">
+</head>
+
+<body>
+<div th:insert="~{fragments/nav-bar :: header}"></div>
+
+<main class="home">
+    <section class="welcome">
+        <h1>Welcome back,
+            <span th:text="${username}">
+                Adventurer
+            </span>!
+        </h1>
+
+        <p>Continue building your legendary collection.</p>
+    </section>
+
+    <section class="games-library">
+
+    </section>
+
+    <section class="stats">
+
+    </section>
+
+    <section class="achievements">
+
+    </section>
+
+</main>
+
+<div th:insert="~{fragments/footer :: footer}"></div>
+
+</body>
+</html>
