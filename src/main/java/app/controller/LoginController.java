@@ -50,21 +50,28 @@ public class LoginController {
 
             session.setAttribute("userId", user.getId());
             session.setAttribute("role", user.getRole());
+            session.setAttribute("username", user.getUsername());
 
-            return new ModelAndView("redirect:/");
+            return new ModelAndView("redirect:/home");
 
         } catch (InvalidUsernameOrPasswordException e) {
 
             modelAndView.setViewName("login");
-
             modelAndView.addObject("userLoginData", userLoginRequest);
-
-            modelAndView.addObject("error",
-                    "Wrong username or password!");
-
+            modelAndView.addObject("error","Wrong username or password!");
         }
 
         return modelAndView;
+    }
+
+    @GetMapping("/logout")
+    public String logout(
+            HttpSession session
+    ) {
+
+        session.invalidate();
+
+        return "redirect:/";
     }
 
 }

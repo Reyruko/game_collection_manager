@@ -15,7 +15,10 @@
 
     <section class="success-card">
 
-        <h1>Welcome, Adventurer!</h1>
+        <h1>Welcome,
+            <span th:text="${username}">
+            Adventurer</span>!
+        </h1>
 
         <p>
             Your account has been forged successfully.

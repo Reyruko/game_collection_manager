@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Header Fragment</title>
@@ -20,12 +20,27 @@
         <a href="#">Features</a>
         <a href="#">About</a>
         <a href="#">Contact</a>
+
+        <th:block th:if="${session.userId == null}">
         <a th:href="@{/login}" class="login">
             LOGIN
         </a>
+
         <a th:href="@{/register}" class="register">
             REGISTER
         </a>
+        </th:block>
+
+        <th:block th:if="${session.userId != null}">
+            <a th:href="@{/profile}">
+                <span th:text="${session.username}">
+                    User
+                </span>
+            </a>
+            <a th:href="@{/logout}" class="logout">
+                LOGOUT
+            </a>
+        </th:block>
     </nav>
 </header>
 </body>

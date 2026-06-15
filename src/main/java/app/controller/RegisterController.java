@@ -6,11 +6,13 @@ import app.exception.UsernameAlreadyExistsException;
 import app.model.dto.user.UserRegisterRequest;
 import app.service.UserService;
 import jakarta.validation.Valid;
+import org.springframework.boot.Banner;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
@@ -64,11 +66,17 @@ public class RegisterController {
             return modelAndView;
         }
 
-        return new ModelAndView("redirect:/register/success");
+        return new ModelAndView("redirect:/register/success?username="
+                + userRegisterRequest.getUsername());
     }
 
     @GetMapping("/register/success")
-    public ModelAndView getRegisterSuccessPage() {
-        return new ModelAndView("register-success");
+    public ModelAndView getRegisterSuccessPage(@RequestParam String username) {
+
+        ModelAndView modelAndView = new ModelAndView("register-success");
+
+        modelAndView.addObject("username", username);
+
+        return modelAndView;
     }
 }
