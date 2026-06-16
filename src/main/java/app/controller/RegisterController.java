@@ -6,7 +6,6 @@ import app.exception.UsernameAlreadyExistsException;
 import app.model.dto.user.UserRegisterRequest;
 import app.service.UserService;
 import jakarta.validation.Valid;
-import org.springframework.boot.Banner;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;

@@ -20,8 +20,5 @@ public class AchievementDTO {
     private String description;
     private boolean unlocked;
     private LocalDateTime unlockedOn;
-    private Game game;
-    private LocalDateTime createdOn;
-    private LocalDateTime updatedOn;
 
 }
