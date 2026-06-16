@@ -6,16 +6,32 @@
 </head>
 <body>
 <header th:fragment="header" class="header">
-    <a th:href="@{/}" class="brand">
-        <img th:src="@{/images/tgv-logo.png}"
+    <th:block th:if="${session.userId == null}">
+        <a th:href="@{/}" class="brand">
+            <img th:src="@{/images/tgv-logo.png}"
+                 alt="The Game Vault logo"
+                 class="logo-img">
+
+            <div class="brand-text">
+                <h2>THE GAME VAULT</h2>
+                <p>Your adventure. Your collection.</p>
+            </div>
+        </a>
+    </th:block>
+
+    <th:block th:if="${session.userId != null}">
+        <a th:href="@{/home}" class="brand">
+            <img th:src="@{/images/tgv-logo.png}"
              alt="The Game Vault logo"
              class="logo-img">
 
-        <div class="brand-text">
-            <h2>THE GAME VAULT</h2>
-            <p>Your adventure. Your collection.</p>
-        </div>
-    </a>
+            <div class="brand-text">
+                <h2>THE GAME VAULT</h2>
+                <p>Your adventure. Your collection.</p>
+            </div>
+        </a>
+    </th:block>
+
     <nav>
         <a href="#">Features</a>
         <a href="#">About</a>
