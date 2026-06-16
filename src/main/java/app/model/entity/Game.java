@@ -1,6 +1,5 @@
 package app.model.entity;
 
-import app.model.enums.GameStatus;
 import app.model.enums.Genre;
 import app.model.enums.Platform;
 import jakarta.persistence.*;
@@ -53,10 +52,6 @@ public class Game {
     @DecimalMin(value = "0.0")
     @DecimalMax(value = "10.0")
     private BigDecimal rating;
-
-    @Column(nullable = false)
-    @Enumerated(EnumType.STRING)
-    private GameStatus status;
 
     private boolean favorite;
 
