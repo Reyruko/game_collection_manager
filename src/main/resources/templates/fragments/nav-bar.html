@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Header Fragment</title>
 </head>
 <body>
 <header th:fragment="header" class="header">
-    <th:block th:if="${session.userId == null}">
+    <th:block sec:authorize="isAnonymous()">
         <a th:href="@{/}" class="brand">
             <img th:src="@{/images/tgv-logo.png}"
                  alt="The Game Vault logo"
@@ -19,7 +19,7 @@
         </a>
     </th:block>
 
-    <th:block th:if="${session.userId != null}">
+    <th:block sec:authorize="isAuthenticated()">
         <a th:href="@{/home}" class="brand">
             <img th:src="@{/images/tgv-logo.png}"
              alt="The Game Vault logo"
@@ -37,7 +37,7 @@
         <a href="#">About</a>
         <a href="#">Contact</a>
 
-        <th:block th:if="${session.userId == null}">
+        <th:block sec:authorize="isAnonymous()">
         <a th:href="@{/login}" class="login">
             LOGIN
         </a>
@@ -47,15 +47,18 @@
         </a>
         </th:block>
 
-        <th:block th:if="${session.userId != null}">
+        <th:block sec:authorize="isAuthenticated()">
             <a th:href="@{/profile}">
-                <span th:text="${session.username}">
+                <span sec:authentication="name">
                     User
                 </span>
             </a>
-            <a th:href="@{/logout}" class="logout">
-                LOGOUT
-            </a>
+
+            <form class="form-logout" th:action="@{/logout}" method="post">
+                <button type="submit" class="logout">
+                    LOGOUT
+                </button>
+            </form>
         </th:block>
     </nav>
 </header>

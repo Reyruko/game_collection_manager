@@ -92,6 +92,7 @@ nav a{
     border-radius:10px;
     color:#ddb57a;
     text-decoration:none;
+    background: rgba(20,20,20,.75);
 }
 
 .logout:hover{
@@ -133,6 +134,13 @@ form{
     padding:50px;
     border-radius:20px;
     width:400px;
+}
+
+form.form-logout {
+    all:unset;
+    display: inline;
+    background: rgba(0, 0, 0, 0.65);
+    border-radius: 10px;
 }
 
 h2{

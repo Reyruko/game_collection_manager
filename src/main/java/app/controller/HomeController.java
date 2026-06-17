@@ -1,6 +1,6 @@
 package app.controller;
 
-import jakarta.servlet.http.HttpSession;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.servlet.ModelAndView;
@@ -9,15 +9,10 @@ import org.springframework.web.servlet.ModelAndView;
 public class HomeController {
 
     @GetMapping("/home")
-    public ModelAndView home(HttpSession session) {
-
-        if (session.getAttribute("userId") == null) {
-            return new ModelAndView("redirect:/login");
-        }
+    public ModelAndView home(Authentication authentication) {
 
         ModelAndView modelAndView = new ModelAndView("home");
-
-        modelAndView.addObject("username", session.getAttribute("username"));
+        modelAndView.addObject("username", authentication.getName());
 
         return modelAndView;
     }
