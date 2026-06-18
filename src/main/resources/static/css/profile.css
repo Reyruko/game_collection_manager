@@ -1,0 +1,135 @@
+body{
+    background: linear-gradient(
+            rgba(0,0,0,0.65),
+            rgba(0,0,0,0.80)),
+    url("../images/treasure-map.png");
+    background-size: cover;
+}
+
+body{
+    background-position: center;
+}
+
+.content-wrapper {
+    display: flex;
+    flex-direction: column;
+    margin: 70px;
+    gap: 20px;
+}
+
+form.form-edit-profile {
+    all:unset;
+    display: inline;
+    background: rgba(0, 0, 0, 0.65);
+    border-radius: 10px;
+}
+
+.profile-page {
+    padding: 0 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    justify-content: space-between;
+}
+
+.card {
+    display: flex;
+    border: 1px solid rgba(255,255,255,.08);
+    border-radius: 10px;
+    padding: 30px;
+    backdrop-filter: blur(3px);
+    box-shadow: 0 10px 30px rgba(0,0,0,.35);
+    transition: .25s ease;
+}
+
+.card:hover {
+    transform: translateY(-2px);
+    border-color: rgba(255,255,255,.15);
+}
+
+.profile-header {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+    justify-content: space-between;
+}
+
+.profile-header img {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid rgba(255,255,255,.15);
+}
+
+.profile-header h2 {
+    font-size: 2.2rem;
+    margin-bottom: 10px;
+    color: #ffffff;
+}
+
+.profile-header p {
+    color: #a9a9b3;
+}
+
+.stats {
+    min-height: 140px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #787887;
+}
+
+.account-info {
+    flex-direction: column;
+}
+
+.account-info h3,
+.collections-preview h3 {
+    margin-bottom: 20px;
+    color: #f4d28a;
+    letter-spacing: 1px;
+}
+
+.account-info p {
+    display: flex;
+    justify-content: space-between;
+    padding: 14px 0;
+    border-bottom: 1px solid rgba(255,255,255,.05);
+    color: #f4d28a;
+}
+
+.account-info p:last-child {
+    border-bottom: none;
+}
+
+.collections-preview {
+    min-height: 220px;
+}
+
+.collections-preview p {
+    color: #9f9fa8;
+    text-align: center;
+    margin-top: 50px;
+}
+
+.edit-button {
+    border: 1px solid rgba(200, 154, 85, .4);
+    border-radius: 10px;
+    color: #ddb57a;
+    text-decoration: none;
+    background: rgba(20, 20, 20, .75);
+}
+
+@media (max-width: 700px) {
+    .profile-header {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .account-info p {
+        flex-direction: column;
+        gap: 8px;
+    }
+
+}

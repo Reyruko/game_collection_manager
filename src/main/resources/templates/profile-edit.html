@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>The Game Vault | Edit - Profile</title>
+    <link rel="stylesheet" th:href="@{/css/common.css}">
+    <link rel="stylesheet" th:href="@{/css/profile-edit.css}">
+</head>
+
+<body>
+<div th:insert="~{fragments/nav-bar :: header}"></div>
+
+<div class="content-wrapper">
+    <section class="profile-header card">
+        <div>
+            <h2> Adventurer:
+                <span th:text="${user.username}">Adventurer</span>
+            </h2>
+        </div>
+    </section>
+
+    <main class="profile-page-edit card">
+
+        <form th:action="@{/profile/edit}" th:object="${user}" method="post">
+
+            <p>Username:</p>
+            <input th:field="*{username}" placeholder="Username"/>
+
+            <div class="error"
+                 th:if="${#fields.hasErrors('username')}"
+                 th:errors="*{username}">
+            </div>
+
+            <p>Email:</p>
+            <input th:field="*{email}" placeholder="Email"/>
+
+            <div class="error"
+                 th:if="${#fields.hasErrors('email')}"
+                 th:errors="*{email}">
+            </div>
+
+            <p>Biography/About me:</p>
+            <textarea th:field="*{bio}" placeholder="Bio"></textarea>
+
+            <p>Password to confirm:</p>
+            <input type="password" th:field="*{currentPassword}" placeholder="Current password"/>
+
+            <div class="error"
+                 th:if="${#fields.hasErrors('currentPassword')}"
+                 th:errors="*{currentPassword}">
+            </div>
+
+            <button type="submit">Save profile</button>
+        </form>
+
+        <form th:action="@{/profile/password}" th:object="${changePasswordRequest}" method="post">
+
+            <p>Current password:</p>
+            <input type="password" th:field="*{currentPassword}" placeholder="Current password"/>
+
+            <div class="error"
+                 th:if="${#fields.hasErrors('currentPassword')}"
+                 th:errors="*{currentPassword}">
+            </div>
+
+            <p>New password:</p>
+            <input type="password" th:field="*{newPassword}" placeholder="New password"/>
+
+            <div class="error"
+                 th:if="${#fields.hasErrors('newPassword')}"
+                 th:errors="*{newPassword}">
+            </div>
+
+            <p>Confirm password:</p>
+            <input type="password" th:field="*{confirmPassword}" placeholder="Confirm password"/>
+
+            <div class="error"
+                 th:if="${#fields.hasErrors('confirmPassword')}"
+                 th:errors="*{confirmPassword}">
+            </div>
+
+            <button type="submit">Change password</button>
+        </form>
+
+    </main>
+</div>
+
+<div th:insert="~{fragments/footer :: footer}"></div>
+</body>
+</html>

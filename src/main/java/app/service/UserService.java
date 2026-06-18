@@ -2,24 +2,25 @@ package app.service;
 
 import app.exception.*;
 import app.mapper.UserMapper;
+import app.model.dto.user.ChangePasswordRequest;
 import app.model.dto.user.UserDTO;
+import app.model.dto.user.UserEditProfileRequest;
 import app.model.dto.user.UserRegisterRequest;
 import app.model.entity.User;
 import app.model.enums.UserRole;
 import app.repository.UserRepository;
 import jakarta.transaction.Transactional;
-import org.springframework.security.authentication.DisabledException;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 @Service
 @Transactional
-public class UserService implements UserDetailsService {
+public class UserService implements UserDetailsService{
 
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
@@ -40,7 +41,7 @@ public class UserService implements UserDetailsService {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         user.setActive(true);
         user.setRole(UserRole.USER);
-        user.setCreatedOn(LocalDateTime.now());
+        user.setCreatedOn(LocalDate.now());
 
         User saved = userRepository.save(user);
 
@@ -58,28 +59,71 @@ public class UserService implements UserDetailsService {
 
         if (!userRegisterRequest.getPassword()
                 .equals(userRegisterRequest.getConfirmPassword())) {
-            throw new PasswordMismatchException();
+            throw new PasswordMismatchException("Passwords dont match!");
         }
     }
 
+    public UserDTO findByUsername(String username) {
+
+        User user = userRepository.findByUsername(username).orElseThrow(() ->
+                        new UsernameNotFoundException(username));
+
+        return userMapper.toUserDTO(user);
+    }
+
     @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+    public UserDetails loadUserByUsername(String username)
+            throws UsernameNotFoundException {
 
-        User user = userRepository.findByUsername(username).orElseThrow(
-                () -> new UsernameNotFoundException(username)
-        );
+        User user = userRepository
+                .findByUsername(username)
+                .orElseThrow(() ->
+                        new UsernameNotFoundException(username));
 
-        if (!user.isActive()) {
-            throw new DisabledException(
-                    "Account inactive"
-            );
-        }
-
-        return org.springframework.security.core.userdetails
-                .User
+        return org.springframework.security.core.userdetails.User
                 .withUsername(user.getUsername())
                 .password(user.getPassword())
-                .roles(user.getRole().name())
+                .authorities("ROLE_" + user.getRole())
                 .build();
+    }
+
+    public void updateProfile(String username,
+            UserEditProfileRequest dto) {
+
+        User user = userRepository.findByUsername(username)
+                        .orElseThrow(UserNotFoundException::new);
+
+        if (!passwordEncoder.matches(dto.getCurrentPassword(),
+                user.getPassword())) {
+            throw new PasswordMismatchException("Current password is incorrect");
+        }
+
+        user.setUsername(dto.getUsername());
+        user.setEmail(dto.getEmail());
+        user.setBio(dto.getBio());
+
+        userRepository.save(user);
+    }
+
+    public void changePassword(
+            String username,
+            ChangePasswordRequest dto) {
+
+        User user = userRepository.findByUsername(username)
+                .orElseThrow(UserNotFoundException::new);
+
+        if (!passwordEncoder.matches(
+                dto.getCurrentPassword(),
+                user.getPassword())) {
+            throw new PasswordMismatchException("Current password is incorrect");
+        }
+
+        if (!dto.getNewPassword().equals(dto.getConfirmPassword())) {
+            throw new PasswordMismatchException("Passwords do not match");
+        }
+
+        user.setPassword(passwordEncoder.encode(dto.getNewPassword()));
+
+        userRepository.save(user);
     }
 }

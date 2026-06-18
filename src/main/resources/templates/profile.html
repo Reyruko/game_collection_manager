@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>The Game Vault | Profile</title>
+    <link rel="stylesheet" th:href="@{/css/common.css}">
+    <link rel="stylesheet" th:href="@{/css/profile.css}">
+</head>
+
+<body>
+<div th:insert="~{fragments/nav-bar :: header}"></div>
+
+<div class="content-wrapper">
+    <section class="profile-header card">
+        <!--        <img th:src="${user.profilePicture != null} ? ${user.profilePicture} : '/images/default-avatar.png'" alt="Profile Picture">-->
+        <div>
+            <h2> Adventurer:
+                <span th:text="${user.username}">Adventurer</span>
+            </h2>
+
+            <p class="bio">
+                About me:
+                <span th:text="${user.bio ?: 'No bio yet.'}"></span>
+            </p>
+
+            <p>
+                Collector since:
+                <span th:text="${user.createdOn}">16 Jun 2026</span>
+            </p>
+        </div>
+
+        <form class="form-edit-profile" th:action="@{/profile/edit}" method="get">
+        <button type="submit" class="edit-button">Edit Profile</button>
+        </form>
+    </section>
+
+<main class="profile-page">
+    <section class="account-info card">
+        <h3>Account Information</h3>
+
+        <p>
+            Username:
+            <span th:text="${user.username}">adventurer123</span>
+        </p>
+
+        <p>
+            Email:
+            <span th:text="${user.email}">ani@example.com</span>
+        </p>
+
+        <p>
+            Member Since:
+            <span th:text="${user.createdOn}">16 Jun 2026</span>
+        </p>
+    </section>
+
+    <!--<section class="stats card">
+
+    </section>-->
+
+    <section class="collections-preview card">
+        <h3>My Collection</h3>
+
+        <!--<p th:if="${user.collections == null or user.collections.isEmpty()}">
+            No collections yet. Start your adventure!
+        </p>-->
+
+    </section>
+</main>
+</div>
+
+<div th:insert="~{fragments/footer :: footer}"></div>
+</body>
+</html>
