@@ -6,7 +6,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.UUID;
 
 @Data
@@ -21,7 +21,8 @@ public class UserDTO {
     private UserRole role;
     private String profilePicture;
     private boolean isActive;
-    private LocalDateTime createdOn;
-    private LocalDateTime updatedOn;
+    private LocalDate createdOn;
+    private LocalDate updatedOn;
+    private String bio;
 
 }

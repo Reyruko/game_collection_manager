@@ -7,7 +7,7 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.*;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.UUID;
 
 @Builder
@@ -44,20 +44,22 @@ public class User {
     @Size(max=255)
     private String profilePicture;
 
+    private String bio;
+
     @Column(name = "is_active", nullable = false)
     private boolean active;
 
-    private LocalDateTime createdOn;
-    private LocalDateTime updatedOn;
+    private LocalDate createdOn;
+    private LocalDate updatedOn;
 
     @PrePersist
     public void prePersist() {
-        createdOn = LocalDateTime.now();
+        createdOn = LocalDate.now();
     }
 
     @PreUpdate
     public void preUpdate() {
-        updatedOn = LocalDateTime.now();
+        updatedOn = LocalDate.now();
     }
 
 }
