@@ -17,6 +17,7 @@ public class SecurityConfig {
                 auth.requestMatchers(
                         "/",
                         "/register",
+                        "/register/success",
                         "/login",
                         "/css/**",
                         "/js/**",
