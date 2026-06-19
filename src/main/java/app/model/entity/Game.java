@@ -3,14 +3,11 @@ package app.model.entity;
 import app.model.enums.Genre;
 import app.model.enums.Platform;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.DecimalMax;
-import jakarta.validation.constraints.DecimalMin;
-import jakarta.validation.constraints.Digits;
 import lombok.*;
 
-import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.UUID;
 
 @Builder
@@ -28,6 +25,8 @@ public class Game {
     @Column(nullable = false)
     private String name;
 
+    private String slug;
+
     @Column(nullable = false)
     private String developer;
 
@@ -36,40 +35,31 @@ public class Game {
 
     private LocalDate releaseDate;
 
+    @Column(length = 3000)
+    private String description;
+
+    private String coverImage;
+
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     private Genre genre;
 
-    @Column(nullable = false)
+    @ElementCollection(targetClass = Platform.class)
     @Enumerated(EnumType.STRING)
-    private Platform platform;
+    @CollectionTable(name = "game_platforms", joinColumns = @JoinColumn(name = "game_id"))
+    @Column(name = "platform")
+    private Set<Platform> platforms = new HashSet<>();
 
-    @Digits(integer = 5, fraction = 1)
-    @DecimalMin("0.0")
-    private BigDecimal hoursPlayed;
-
-    @Digits(integer = 2, fraction = 1)
-    @DecimalMin(value = "0.0")
-    @DecimalMax(value = "10.0")
-    private BigDecimal rating;
-
-    private boolean favorite;
-
-    @ManyToOne
-    @JoinColumn(nullable = false)
-    private User owner;
-
-    private LocalDate purchaseDate;
-    private LocalDateTime createdOn;
-    private LocalDateTime updatedOn;
+    private LocalDate createdOn;
+    private LocalDate updatedOn;
 
     @PrePersist
     public void prePersist() {
-        createdOn = LocalDateTime.now();
+        createdOn = LocalDate.now();
     }
 
     @PreUpdate
     public void preUpdate() {
-        updatedOn = LocalDateTime.now();
+        updatedOn = LocalDate.now();
     }
 }

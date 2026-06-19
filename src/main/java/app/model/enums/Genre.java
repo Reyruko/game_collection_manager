@@ -3,7 +3,10 @@ package app.model.enums;
 public enum Genre {
     ACTION,
     ACTION_ADVENTURE,
+    ADVENTURE,
+    BATTLE_ROYALE,
     RPG,
+    JRPG,
     MMORPG,
     SHOOTER,
     STRATEGY,
@@ -15,9 +18,12 @@ public enum Genre {
     SURVIVAL,
     HORROR,
     SANDBOX,
+    MOBA,
     PLATFORMER,
     SOULSLIKE,
     ROGUELIKE,
     VISUAL_NOVEL,
-    INDIE
+    INDIE,
+    FPS,
+    TACTICAL_RPG
 }
