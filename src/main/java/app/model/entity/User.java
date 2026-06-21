@@ -8,6 +8,8 @@ import jakarta.validation.constraints.Size;
 import lombok.*;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 @Builder
@@ -61,5 +63,8 @@ public class User {
     public void preUpdate() {
         updatedOn = LocalDate.now();
     }
+
+    @OneToMany(mappedBy = "user")
+    private List<UserGame> games = new ArrayList<>();
 
 }

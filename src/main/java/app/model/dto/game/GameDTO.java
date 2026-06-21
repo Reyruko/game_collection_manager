@@ -22,6 +22,7 @@ public class GameDTO {
     private String name;
     private String developer;
     private String publisher;
+    private String description;
     private LocalDate releaseDate;
     private Genre genre;
     private Platform platform;

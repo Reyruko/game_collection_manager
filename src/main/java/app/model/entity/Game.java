@@ -5,10 +5,9 @@ import app.model.enums.Platform;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
+import java.util.*;
 
 @Builder
 @Setter
@@ -40,13 +39,16 @@ public class Game {
 
     private String coverImage;
 
+    private BigDecimal hoursPlayed;
+
+    private BigDecimal rating;
+
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     private Genre genre;
 
     @ElementCollection(targetClass = Platform.class)
     @Enumerated(EnumType.STRING)
-    @CollectionTable(name = "game_platforms", joinColumns = @JoinColumn(name = "game_id"))
     @Column(name = "platform")
     private Set<Platform> platforms = new HashSet<>();
 
@@ -62,4 +64,7 @@ public class Game {
     public void preUpdate() {
         updatedOn = LocalDate.now();
     }
+
+    @OneToMany(mappedBy = "game")
+    private List<UserGame> users = new ArrayList<>();
 }

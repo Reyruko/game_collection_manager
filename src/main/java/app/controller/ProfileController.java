@@ -4,6 +4,8 @@ import app.exception.PasswordMismatchException;
 import app.model.dto.user.ChangePasswordRequest;
 import app.model.dto.user.UserDTO;
 import app.model.dto.user.UserEditProfileRequest;
+import app.model.entity.UserGame;
+import app.service.UserGameService;
 import app.service.UserService;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
@@ -15,14 +17,17 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.security.Principal;
+import java.util.List;
 
 @Controller
 public class ProfileController {
 
     private final UserService userService;
+    private final UserGameService userGameService;
 
-    public ProfileController(UserService userService) {
+    public ProfileController(UserService userService, UserGameService userGameService) {
         this.userService = userService;
+        this.userGameService = userGameService;
     }
 
     @GetMapping("/profile")
@@ -32,8 +37,11 @@ public class ProfileController {
 
         UserDTO userDTO = userService.findByUsername(username);
 
+        List<UserGame> gameLibrary = userGameService.getUserGames(username);
+
         ModelAndView modelAndView = new ModelAndView("profile");
         modelAndView.addObject("user", userDTO);
+        modelAndView.addObject("collection", gameLibrary);
 
         return modelAndView;
     }
