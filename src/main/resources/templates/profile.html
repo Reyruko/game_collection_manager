@@ -55,15 +55,40 @@
     </section>
 
     <!--<section class="stats card">
-
     </section>-->
 
     <section class="collections-preview card">
         <h3>My Collection</h3>
 
-        <!--<p th:if="${user.collections == null or user.collections.isEmpty()}">
-            No collections yet. Start your adventure!
-        </p>-->
+        <div class="collection-grid">
+
+            <div th:if="${#lists.isEmpty(collection)}">
+                No games added yet.
+            </div>
+
+            <div class="game-card"
+                 th:each="entry : ${collection}">
+
+                <h4 th:text="${entry.game.name}">
+                    Game
+                </h4>
+
+                <p th:text="${entry.status}">
+                    WISHLIST
+                </p>
+
+                <p>
+                    Rating:
+                    <span th:text="${entry.rating}">—</span>
+                </p>
+
+                <p>
+                    Hours:
+                    <span th:text="${entry.hoursPlayed}">0</span>
+                </p>
+
+            </div>
+        </div>
 
     </section>
 </main>

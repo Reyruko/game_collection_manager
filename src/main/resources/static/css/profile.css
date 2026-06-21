@@ -121,6 +121,63 @@ form.form-edit-profile {
     background: rgba(20, 20, 20, .75);
 }
 
+.collection {
+    margin-top: 2rem;
+}
+
+.collection h3 {
+    margin-bottom: 1.5rem;
+    color: white;
+    font-size: 1.6rem;
+}
+
+.collection-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 20px;
+}
+
+.game-card {
+    background: rgba(25, 25, 40, 33%);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 10px;
+    padding: 20px;
+    transition: 0.2s;
+    min-height: 180px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.game-card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(120,170,255,0.35);
+}
+
+.game-card h4 {
+    margin: 0 0 12px;
+    color: white;
+    font-size: 1.15rem;
+}
+
+.game-card p {
+    margin: 6px 0;
+    color: #b5b5b5;
+    font-size: 0.95rem;
+}
+
+.game-card p:first-of-type {
+    color: #7ea9ff;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.game-card span {
+    color: white;
+    font-weight: 600;
+}
+
+
 @media (max-width: 700px) {
     .profile-header {
         flex-direction: column;
@@ -132,4 +189,7 @@ form.form-edit-profile {
         gap: 8px;
     }
 
+    .collection-grid {
+        grid-template-columns: 1fr;
+    }
 }
