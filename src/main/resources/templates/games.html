@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>The Game Vault | Home</title>
+    <link rel="stylesheet" th:href="@{/css/common.css}">
+    <link rel="stylesheet" th:href="@{/css/games.css}">
+</head>
+
+<body>
+<div th:insert="~{fragments/nav-bar :: header}"></div>
+
+<main class="games-library">
+
+    <h2>All games</h2>
+
+    <table class="top-10">
+        <tbody>
+        <tr class="table-header">
+            <td class="rank">Rank</td>
+            <td class="title">Title</td>
+            <td class="score">Score</td>
+            <td class="status">Status</td>
+        </tr>
+        <tr class="ranking-list" th:each="game, stat : ${games}">
+            <td class="rank tc" th:text="${stat.count}">1</td>
+            <td class="title tc">
+                <div class="detail">
+                    <h3 class="game-name" th:text="${game.name}">
+                        Game Name
+                    </h3>
+                    <p class="game-desc" th:text="${game.description}">
+                        Game Description here.
+                    </p>
+                    <p class="platform" th:text="${game.platform}">
+                        PC / PS / XBOX / MOBILE
+                    </p>
+                </div>
+            </td>
+            <td class="score tc" th:text="${game.rating}">
+                9.81
+            </td>
+            <td class="status tc">
+                <form class="collection-form" th:action="@{/games/{id}/add(id=${game.id})}" method="post">
+                    <button type="submit">
+                        Add to Collection
+                    </button>
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+</main>
+
+<div th:insert="~{fragments/footer :: footer}"></div>
+
+</body>
+</html>

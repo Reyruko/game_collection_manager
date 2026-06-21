@@ -1,4 +1,4 @@
-package app.model.dto.collection;
+package app.model.dto.usergame;
 
 import app.model.enums.GameStatus;
 import lombok.AllArgsConstructor;
@@ -12,7 +12,7 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class CollectionCreateRequest {
+public class UserGameCreateRequest {
 
     private UUID gameId;
     private GameStatus status;
