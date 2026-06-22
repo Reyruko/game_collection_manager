@@ -87,39 +87,45 @@ public class UserService implements UserDetailsService{
                 .build();
     }
 
-    public void updateProfile(String username,
-            UserEditProfileRequest dto) {
-
-        User user = userRepository.findByUsername(username)
-                        .orElseThrow(UserNotFoundException::new);
+    public void updateProfile(String username, UserEditProfileRequest dto) {
+        User user = userRepository.findByUsername(username).orElseThrow(UserNotFoundException::new);
 
         if (!passwordEncoder.matches(dto.getCurrentPassword(),
                 user.getPassword())) {
             throw new PasswordMismatchException("Current password is incorrect");
         }
 
-        user.setUsername(dto.getUsername());
-        user.setEmail(dto.getEmail());
-        user.setBio(dto.getBio());
+        if (!user.getUsername().equals(dto.getUsername())
+                && userRepository.existsByUsername(dto.getUsername())) {
+            throw new UsernameAlreadyExistsException();
+        }
+
+        if (!user.getEmail().equals(dto.getEmail())
+                && userRepository.existsByEmail(dto.getEmail())) {
+            throw new EmailAlreadyExistsException();
+        }
+
+        user.setUsername(dto.getUsername().trim());
+        user.setEmail(dto.getEmail().trim());
+        user.setBio(dto.getBio()!= null ? dto.getBio().trim() : null);
 
         userRepository.save(user);
     }
 
-    public void changePassword(
-            String username,
-            ChangePasswordRequest dto) {
+    public void changePassword(String username, ChangePasswordRequest dto) {
 
-        User user = userRepository.findByUsername(username)
-                .orElseThrow(UserNotFoundException::new);
+        User user = userRepository.findByUsername(username).orElseThrow(UserNotFoundException::new);
 
-        if (!passwordEncoder.matches(
-                dto.getCurrentPassword(),
-                user.getPassword())) {
+        if (!passwordEncoder.matches(dto.getCurrentPassword(), user.getPassword())) {
             throw new PasswordMismatchException("Current password is incorrect");
         }
 
         if (!dto.getNewPassword().equals(dto.getConfirmPassword())) {
             throw new PasswordMismatchException("Passwords do not match");
+        }
+
+        if (passwordEncoder.matches(dto.getNewPassword(), user.getPassword())) {
+            throw new PasswordMismatchException("New password must differ from current password");
         }
 
         user.setPassword(passwordEncoder.encode(dto.getNewPassword()));

@@ -20,7 +20,7 @@ public class SecurityConfig {
                         "/register/success",
                         "/login",
                         "/css/**",
-                        "/js/**",
+                        "/static/js/**",
                         "/images/**"
                 ).permitAll()
 
@@ -41,8 +41,8 @@ public class SecurityConfig {
 
                 .logout(logout ->
                         logout.logoutUrl("/logout")
-                                .logoutSuccessUrl("/")
-                );
+                                .logoutSuccessUrl("/"));
+
         return http.build();
     }
 }
