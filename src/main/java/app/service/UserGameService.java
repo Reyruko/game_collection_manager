@@ -20,26 +20,9 @@ public class UserGameService {
     private final UserRepository userRepository;
 
     public List<UserGame> getUserGames(String username){
-
         User user = userRepository.findByUsername(username).orElseThrow(UserNotFoundException::new);
 
         return userGameRepository.findAllByUser(user);
     }
 
-    public void addGame(User user, Game game) {
-
-        boolean exists = userGameRepository.existsByUserAndGame(user, game);
-
-        if (exists) {
-            return;
-        }
-
-        UserGame userGame = new UserGame();
-
-        userGame.setUser(user);
-        userGame.setGame(game);
-        userGame.setStatus(GameStatus.WISHLIST);
-
-        userGameRepository.save(userGame);
-    }
 }
