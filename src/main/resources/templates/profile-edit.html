@@ -21,7 +21,9 @@
 
     <main class="profile-page-edit card">
 
-        <form th:action="@{/profile/edit}" th:object="${user}" method="post">
+        <form class="edit-profile" th:action="@{/profile/edit}" th:object="${user}" method="post">
+
+            <h3>Edit profile:</h3>
 
             <p>Username:</p>
             <input th:field="*{username}" placeholder="Username"/>
@@ -53,7 +55,8 @@
             <button type="submit">Save profile</button>
         </form>
 
-        <form th:action="@{/profile/password}" th:object="${changePasswordRequest}" method="post">
+        <form class="edit-password" th:action="@{/profile/password}" th:object="${changePasswordRequest}" method="post">
+            <h3>Change password:</h3>
 
             <p>Current password:</p>
             <input type="password" th:field="*{currentPassword}" placeholder="Current password"/>

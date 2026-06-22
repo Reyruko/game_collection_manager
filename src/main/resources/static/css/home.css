@@ -41,9 +41,20 @@ body{
     font-size:18px;
 }
 
-.games-library,
-.stats,
-.achievements{
+.games-link {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #cfe8ff;
+    text-decoration: none;
+    border-radius: 6px;
+}
+
+.games-link:hover {
+    background: rgb(77 163 255 / 0.02);
+    color: #ffffff;
+}
+
+.games-library{
     min-height:220px;
     background: rgba(12,12,12,.65);
     border: 1px solid rgba(221,181,122,.10);
@@ -51,34 +62,52 @@ body{
     padding:30px;
     backdrop-filter: blur(8px);
     transition:.25s;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
 }
 
-.games-library:hover,
-.stats:hover,
-.achievements:hover{
+.games-library:hover{
     transform:translateY(-2px);
     border-color: rgba(221,181,122,.25);
 }
 
 .games-library::before{
-    content:"🎮 Game Library";
-}
-
-.stats::before{
-    content:"📊 Progress";
+    content:"Game Library";
 }
 
 .achievements::before{
-    content:"🏆 Achievements";
+    content:"Achievements";
 }
 
-.games-library::before,
-.stats::before,
-.achievements::before{
+.games-library::before{
     display:block;
     font-size:26px;
     margin-bottom:25px;
     color:#ddb57a;
+}
+
+.games-library h3 {
+    color: #ddb57a;
+}
+
+.games-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 20px;
+}
+
+.game-card {
+    background: rgba(25, 25, 40, 33%);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 10px;
+    padding: 20px;
+    transition: 0.2s;
+    min-height: 180px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    color: rgb(120 142 255 / 71%);
 }
 
 @media(max-width:768px){

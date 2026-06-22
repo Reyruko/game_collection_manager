@@ -5,6 +5,7 @@
     <title>The Game Vault | Home</title>
     <link rel="stylesheet" th:href="@{/css/common.css}">
     <link rel="stylesheet" th:href="@{/css/games.css}">
+    <script th:src="@{/js/submit.js}" defer></script>
 </head>
 
 <body>
@@ -14,7 +15,7 @@
 
     <h2>All games</h2>
 
-    <table class="top-10">
+    <table class="games-table">
         <tbody>
         <tr class="table-header">
             <td class="rank">Rank</td>
@@ -42,6 +43,9 @@
             </td>
             <td class="status tc">
                 <form class="collection-form" th:action="@{/games/{id}/add(id=${game.id})}" method="post">
+                    <input type="hidden"
+                           th:name="${_csrf.parameterName}"
+                           th:value="${_csrf.token}">
                     <button type="submit">
                         Add to Collection
                     </button>

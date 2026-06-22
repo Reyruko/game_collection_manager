@@ -5,6 +5,7 @@
     <title>The Game Vault | Profile</title>
     <link rel="stylesheet" th:href="@{/css/common.css}">
     <link rel="stylesheet" th:href="@{/css/profile.css}">
+    <script th:src="@{/js/toggleEdit.js}" defer></script>
 </head>
 
 <body>
@@ -54,11 +55,9 @@
         </p>
     </section>
 
-    <!--<section class="stats card">
-    </section>-->
-
     <section class="collections-preview card">
-        <h3>My Collection</h3>
+
+        <h3 class="section-title">My Collection</h3>
 
         <div class="collection-grid">
 
@@ -66,26 +65,67 @@
                 No games added yet.
             </div>
 
-            <div class="game-card"
-                 th:each="entry : ${collection}">
+            <div class="game-card" th:each="entry : ${collection}">
 
-                <h4 th:text="${entry.game.name}">
-                    Game
-                </h4>
+                <div class="view-mode">
 
-                <p th:text="${entry.status}">
-                    WISHLIST
-                </p>
+                    <h4 th:text="${entry.game.name}"></h4>
 
-                <p>
-                    Rating:
-                    <span th:text="${entry.rating}">—</span>
-                </p>
+                    <p th:text="${entry.status}"></p>
 
-                <p>
-                    Hours:
-                    <span th:text="${entry.hoursPlayed}">0</span>
-                </p>
+                    <p>
+                        Rating:
+                        <span th:text="${entry.rating}"></span>
+                    </p>
+
+                    <p>
+                        Hours:
+                        <span th:text="${entry.hoursPlayed}"></span>
+                    </p>
+
+                    <button class="edit-btn"
+                            type="button"
+                            onclick="toggleEdit(this)">
+                        Edit
+                    </button>
+
+                </div>
+
+                <form class="edit-form hidden" th:action="@{/gameLibrary/edit/{id}(id=${entry.id})}" method="post">
+
+                    <h4 th:text="${entry.game.name}"></h4>
+
+                    <select name="status">
+                        <option th:each="status : ${T(app.model.enums.GameStatus).values()}"
+                                th:value="${status}"
+                                th:text="${status}"
+                                th:selected="${status == entry.status}">
+                        </option>
+                    </select>
+
+                    <input type="number"
+                           min="0"
+                           max="10"
+                           step="0.1"
+                           name="rating"
+                           placeholder="Add rating"
+                           th:value="${entry.rating}">
+
+                    <input type="number"
+                           name="hoursPlayed"
+                           placeholder="Hours played"
+                           th:value="${entry.hoursPlayed}">
+
+                    <button class="save-btn" type="submit">
+                        Save
+                    </button>
+
+                    <button class="cancel-btn" type="button"
+                            onclick="toggleEdit(this)">
+                        Cancel
+                    </button>
+
+                </form>
 
             </div>
         </div>

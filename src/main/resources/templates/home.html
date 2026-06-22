@@ -12,25 +12,30 @@
 
 <main class="home">
     <section class="welcome">
-        <h1>Welcome back,
+        <h1>Welcome,
             <span th:text="${username}">
                 Adventurer
             </span>!
         </h1>
 
-        <p>Continue building your legendary collection.</p>
+        <p>Build your legendary collection.</p>
     </section>
 
     <section class="games-library">
+        <a th:href="@{/games}" class="games-link">Browse Games</a>
 
-    </section>
+        <h3>Recently added: </h3>
 
-    <section class="stats">
-
-    </section>
-
-    <section class="achievements">
-
+        <div class="games-container">
+            <div class="games-grid">
+                <div th:each="game : ${latestGames}" class="game-card">
+                    <h5>Name:</h5>
+                    <h4 th:text="${game.name}"></h4>
+                    <h5>Genre:</h5>
+                    <p th:text="${game.genre}"></p>
+                </div>
+            </div>
+        </div>
     </section>
 
 </main>

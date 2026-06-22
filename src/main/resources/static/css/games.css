@@ -32,11 +32,11 @@ body{
     color: white;
 }
 
-.top-10 {
+.games-table {
     width: 100%;
     border-collapse: collapse;
     table-layout: fixed;
-    background: rgba(18, 18, 28, 0.95);
+    background: rgb(18 18 28 / 57%);
     border: 1px solid rgba(255,255,255,0.08);
     border-radius: 10px;
     overflow: hidden;
