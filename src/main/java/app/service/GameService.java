@@ -55,9 +55,9 @@ public class GameService {
 
     public void removeGame(String username, UUID id) {
         User user = userRepository.findByUsername(username).orElseThrow(UserNotFoundException::new);
+        UserGame userGame = userGameRepository.findByUserAndGameId((user), id).orElseThrow(GameNotFoundException::new);
 
-        user.getGames().removeIf(g -> g.getId().equals(id));
-        userRepository.save(user);
+        userGameRepository.delete(userGame);
     }
 
     public List<Game> getLatestGames(int limit) {

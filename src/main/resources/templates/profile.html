@@ -13,7 +13,6 @@
 
 <div class="content-wrapper">
     <section class="profile-header card">
-        <!--        <img th:src="${user.profilePicture != null} ? ${user.profilePicture} : '/images/default-avatar.png'" alt="Profile Picture">-->
         <div>
             <h2> Adventurer:
                 <span th:text="${user.username}">Adventurer</span>
@@ -83,11 +82,25 @@
                         <span th:text="${entry.hoursPlayed}"></span>
                     </p>
 
+                    <div class="button-container">
+
                     <button class="edit-btn"
                             type="button"
                             onclick="toggleEdit(this)">
                         Edit
                     </button>
+
+                    <form class="remove-game-form" th:action="@{/gameLibrary/remove/{id}(id=${entry.game.id})}"
+                          method="post">
+
+                        <button class="remove-btn"
+                                type="submit">
+                            Remove
+                        </button>
+
+                    </form>
+
+                    </div>
 
                 </div>
 

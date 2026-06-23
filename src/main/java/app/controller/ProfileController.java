@@ -112,6 +112,13 @@ public class ProfileController {
         return "redirect:/profile";
     }
 
+    @PostMapping("gameLibrary/remove/{id}")
+    public String removeGame(@PathVariable UUID id,
+                             Principal principal) {
+        gameService.removeGame(principal.getName(), id);
+        return "redirect:/profile";
+    }
+
     private void populateProfileEditModel(Model model, String username) {
         UserDTO user = userService.findByUsername(username);
 
