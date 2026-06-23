@@ -11,8 +11,9 @@ import java.util.UUID;
 
 @Repository
 public interface UserGameRepository extends JpaRepository<UserGame, UUID> {
-    Optional<UserGame> findByUser(User user);
-    Optional<UserGame> findByUserUsernameAndGameId(String username, UUID gameId);
+    int countByUserId(UUID userId);
     List<UserGame> findAllByUser(User user);
     boolean existsByUserUsernameAndGameId(String username, UUID gameId);
+    UUID user(User user);
+    Optional<UserGame> findByUserAndGameId(User user, UUID id);
 }

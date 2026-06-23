@@ -22,8 +22,8 @@
     <th:block sec:authorize="isAuthenticated()">
         <a th:href="@{/home}" class="brand">
             <img th:src="@{/images/tgv-logo.png}"
-             alt="The Game Vault logo"
-             class="logo-img">
+                 alt="The Game Vault logo"
+                 class="logo-img">
 
             <div class="brand-text">
                 <h2>THE GAME VAULT</h2>
@@ -37,14 +37,20 @@
         <a href="#">About</a>
         <a href="#">Contact</a>
 
-        <th:block sec:authorize="isAnonymous()">
-        <a th:href="@{/login}" class="login">
-            LOGIN
-        </a>
+        <th:block sec:authorize="hasRole('ADMIN')">
+            <a th:href="@{/admin}" class="admin-panel">
+                Admin panel
+            </a>
+        </th:block>
 
-        <a th:href="@{/register}" class="register">
-            REGISTER
-        </a>
+        <th:block sec:authorize="isAnonymous()">
+            <a th:href="@{/login}" class="login">
+                LOGIN
+            </a>
+
+            <a th:href="@{/register}" class="register">
+                REGISTER
+            </a>
         </th:block>
 
         <th:block sec:authorize="isAuthenticated()">
