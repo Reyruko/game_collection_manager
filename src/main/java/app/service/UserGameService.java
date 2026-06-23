@@ -1,10 +1,8 @@
 package app.service;
 
 import app.exception.UserNotFoundException;
-import app.model.entity.Game;
 import app.model.entity.User;
 import app.model.entity.UserGame;
-import app.model.enums.GameStatus;
 import app.repository.UserGameRepository;
 import app.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
