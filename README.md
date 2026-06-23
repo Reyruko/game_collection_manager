@@ -1,7 +1,3 @@
-![Java](https://img.shields.io/badge/Java-21-orange)
-![Spring Boot](https://img.shields.io/badge/Spring_Boot-3.x-green)
-![MySQL](https://img.shields.io/badge/MySQL-Database-blue)
-![License](https://img.shields.io/badge/License-MIT-lightgrey)
 
 # Game Collection Manager MVC Application
 
