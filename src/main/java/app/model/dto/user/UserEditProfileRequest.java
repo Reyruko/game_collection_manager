@@ -2,7 +2,6 @@ package app.model.dto.user;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -29,5 +28,4 @@ public class UserEditProfileRequest {
     @NotBlank(message = "Please enter password")
     private String currentPassword;
 
-    //private String profilePictureUrl;
 }
