@@ -1,6 +1,7 @@
 package app.controller;
 
-import app.service.GameService;
+import app.service.GameApiService;
+import app.service.UserGameService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,17 +16,19 @@ import java.util.UUID;
 @Controller
 public class GameController {
 
-    private final GameService gameService;
+    private final GameApiService gameApiService;
+    private final UserGameService userGameService;
 
-    public GameController(GameService gameService) {
-        this.gameService = gameService;
+    public GameController(GameApiService gameApiService, UserGameService userGameService) {
+        this.gameApiService = gameApiService;
+        this.userGameService = userGameService;
     }
 
     @GetMapping("/games")
     public ModelAndView getGames() {
 
         ModelAndView modelAndView = new ModelAndView("games");
-        modelAndView.addObject("games", gameService.getAllGames());
+        modelAndView.addObject("games", gameApiService.getAllGames());
 
         return modelAndView;
     }
@@ -34,7 +37,7 @@ public class GameController {
     @ResponseBody
     public ResponseEntity<String> addGame(@PathVariable UUID id, Principal principal) {
 
-        boolean added = gameService.addToGameLibrary(principal.getName(), id);
+        boolean added = userGameService.addToGameLibrary(principal.getName(), id);
 
         if (!added) {
             return ResponseEntity.status(409).body("exists");

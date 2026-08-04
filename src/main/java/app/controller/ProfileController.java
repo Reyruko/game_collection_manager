@@ -6,7 +6,6 @@ import app.model.dto.user.UserDTO;
 import app.model.dto.user.UserEditProfileRequest;
 import app.model.dto.usergame.EditGameLibraryRequest;
 import app.model.entity.UserGame;
-import app.service.GameService;
 import app.service.UserGameService;
 import app.service.UserService;
 import jakarta.validation.Valid;
@@ -29,12 +28,10 @@ public class ProfileController {
 
     private final UserService userService;
     private final UserGameService userGameService;
-    private final GameService gameService;
 
-    public ProfileController(UserService userService, UserGameService userGameService, GameService gameService) {
+    public ProfileController(UserService userService, UserGameService userGameService) {
         this.userService = userService;
         this.userGameService = userGameService;
-        this.gameService = gameService;
     }
 
     @GetMapping("/profile")
@@ -107,7 +104,7 @@ public class ProfileController {
                                  EditGameLibraryRequest editGameLibraryRequest,
                                  Principal principal) {
 
-        gameService.editGameLibrary(principal.getName(), id, editGameLibraryRequest);
+        userGameService.editGameLibrary(principal.getName(), id, editGameLibraryRequest);
 
         return "redirect:/profile";
     }
@@ -115,7 +112,7 @@ public class ProfileController {
     @PostMapping("gameLibrary/remove/{id}")
     public String removeGame(@PathVariable UUID id,
                              Principal principal) {
-        gameService.removeGame(principal.getName(), id);
+        userGameService.removeGame(principal.getName(), id);
         return "redirect:/profile";
     }
 

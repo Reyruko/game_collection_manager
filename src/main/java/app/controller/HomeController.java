@@ -1,6 +1,6 @@
 package app.controller;
 
-import app.service.GameService;
+import app.service.GameApiService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
@@ -11,14 +11,14 @@ import org.springframework.web.servlet.ModelAndView;
 @RequiredArgsConstructor
 public class HomeController {
 
-    private final GameService gameService;
+    private final GameApiService gameApiService;
 
     @GetMapping("/home")
     public ModelAndView home(Authentication authentication) {
 
         ModelAndView modelAndView = new ModelAndView("home");
         modelAndView.addObject("username", authentication.getName());
-        modelAndView.addObject("latestGames", gameService.getLatestGames(5));
+        modelAndView.addObject("latestGames", gameApiService.getLatestGames());
 
         return modelAndView;
     }

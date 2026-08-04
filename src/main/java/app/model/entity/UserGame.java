@@ -27,9 +27,7 @@ public class UserGame {
     @JoinColumn(name = "user_id")
     private User user;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "games_id")
-    private Game game;
+    private UUID gameId;
 
     private boolean favorite;
 
