@@ -5,6 +5,7 @@ import app.model.dto.user.ChangePasswordRequest;
 import app.model.dto.user.UserDTO;
 import app.model.dto.user.UserEditProfileRequest;
 import app.model.dto.usergame.EditGameLibraryRequest;
+import app.model.dto.usergame.UserGameProfileDTO;
 import app.model.entity.UserGame;
 import app.service.UserGameService;
 import app.service.UserService;
@@ -41,7 +42,8 @@ public class ProfileController {
 
         UserDTO userDTO = userService.findByUsername(username);
 
-        List<UserGame> gameLibrary = userGameService.getUserGames(username);
+        List<UserGameProfileDTO> gameLibrary =
+                userGameService.getUserGames(username);
 
         ModelAndView modelAndView = new ModelAndView("profile");
         modelAndView.addObject("user", userDTO);

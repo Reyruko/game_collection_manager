@@ -68,7 +68,7 @@
 
                 <div class="view-mode">
 
-                    <h4 th:text="${entry.game.name}"></h4>
+                    <h4 th:text="${entry.name}"></h4>
 
                     <p th:text="${entry.status}"></p>
 
@@ -90,7 +90,7 @@
                         Edit
                     </button>
 
-                    <form class="remove-game-form" th:action="@{/gameLibrary/remove/{id}(id=${entry.game.id})}"
+                    <form class="remove-game-form" th:action="@{/gameLibrary/remove/{id}(id=${entry.gameId})}"
                           method="post">
 
                         <button class="remove-btn"
@@ -106,7 +106,7 @@
 
                 <form class="edit-form hidden" th:action="@{/gameLibrary/edit/{id}(id=${entry.id})}" method="post">
 
-                    <h4 th:text="${entry.game.name}"></h4>
+                    <h4 th:text="${entry.name}"></h4>
 
                     <select name="status">
                         <option th:each="status : ${T(app.model.enums.GameStatus).values()}"

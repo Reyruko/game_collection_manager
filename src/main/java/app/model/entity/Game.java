@@ -65,6 +65,4 @@ public class Game {
         updatedOn = LocalDate.now();
     }
 
-    @OneToMany(mappedBy = "game")
-    private List<UserGame> users = new ArrayList<>();
 }

@@ -19,6 +19,7 @@ import java.util.UUID;
 public class GameDTO {
 
     private UUID id;
+    private UUID gameId;
     private String name;
     private String developer;
     private String publisher;
@@ -30,5 +31,6 @@ public class GameDTO {
     private BigDecimal rating;
     private boolean favorite;
     private LocalDate purchaseDate;
+    private String coverImage;
 
 }

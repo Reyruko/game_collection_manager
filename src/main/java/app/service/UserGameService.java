@@ -3,7 +3,9 @@ package app.service;
 import app.exception.GameNotFoundException;
 import app.exception.UnauthorizedException;
 import app.exception.UserNotFoundException;
+import app.model.dto.game.GameDTO;
 import app.model.dto.usergame.EditGameLibraryRequest;
+import app.model.dto.usergame.UserGameProfileDTO;
 import app.model.entity.User;
 import app.model.entity.UserGame;
 import app.model.enums.GameStatus;
@@ -24,10 +26,35 @@ public class UserGameService {
     private final UserRepository userRepository;
     private final GameApiService gameApiService;
 
-    public List<UserGame> getUserGames(String username){
+    /*public List<UserGame> getUserGames(String username){
         User user = userRepository.findByUsername(username).orElseThrow(UserNotFoundException::new);
 
         return userGameRepository.findAllByUser(user);
+    }*/
+
+    public List<UserGameProfileDTO> getUserGames(String username) {
+
+        User user = userRepository.findByUsername(username)
+                .orElseThrow(UserNotFoundException::new);
+
+        List<UserGame> userGames = userGameRepository.findAllByUser(user);
+
+        return userGames.stream()
+                .map(userGame -> {
+
+                    GameDTO game = gameApiService.getGameById(userGame.getGameId());
+
+                    return new UserGameProfileDTO(
+                            userGame.getId(),
+                            userGame.getGameId(),
+                            game.getName(),
+                            userGame.getStatus(),
+                            userGame.getHoursPlayed(),
+                            userGame.getRating(),
+                            userGame.isFavorite()
+                    );
+                })
+                .toList();
     }
 
     public boolean addToGameLibrary(String username, UUID gameId) {
@@ -70,6 +97,31 @@ public class UserGameService {
         entry.setHoursPlayed(editGameLibraryRequest.getHoursPlayed());
 
         userGameRepository.save(entry);
+    }
+
+    public List<UserGameProfileDTO> getUserGamesWithDetails(String username) {
+
+        User user = userRepository.findByUsername(username)
+                .orElseThrow(UserNotFoundException::new);
+
+        return userGameRepository.findAllByUser(user)
+                .stream()
+                .map(userGame -> {
+
+                    GameDTO game = gameApiService.getGameById(userGame.getGameId());
+
+                    return new UserGameProfileDTO(
+                            game.getId(),
+                            game.getGameId(),
+                            game.getName(),
+                            userGame.getStatus(),
+                            userGame.getHoursPlayed(),
+                            userGame.getRating(),
+                            userGame.isFavorite()
+                    );
+
+                })
+                .toList();
     }
 
 }
