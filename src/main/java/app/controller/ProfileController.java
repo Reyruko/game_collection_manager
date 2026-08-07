@@ -6,7 +6,6 @@ import app.model.dto.user.UserDTO;
 import app.model.dto.user.UserEditProfileRequest;
 import app.model.dto.usergame.EditGameLibraryRequest;
 import app.model.dto.usergame.UserGameProfileDTO;
-import app.model.entity.UserGame;
 import app.service.UserGameService;
 import app.service.UserService;
 import jakarta.validation.Valid;

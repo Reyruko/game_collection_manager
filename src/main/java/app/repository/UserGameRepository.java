@@ -1,6 +1,5 @@
 package app.repository;
 
-import app.model.dto.usergame.UserGameProfileDTO;
 import app.model.entity.User;
 import app.model.entity.UserGame;
 import org.springframework.data.jpa.repository.JpaRepository;

@@ -26,12 +26,6 @@ public class UserGameService {
     private final UserRepository userRepository;
     private final GameApiService gameApiService;
 
-    /*public List<UserGame> getUserGames(String username){
-        User user = userRepository.findByUsername(username).orElseThrow(UserNotFoundException::new);
-
-        return userGameRepository.findAllByUser(user);
-    }*/
-
     public List<UserGameProfileDTO> getUserGames(String username) {
 
         User user = userRepository.findByUsername(username)
