@@ -61,7 +61,7 @@
         <div class="collection-grid">
 
             <div th:if="${#lists.isEmpty(collection)}">
-                No games added yet.
+                No games added yet. <a th:href="@{/games}" class="games-link">Browse Games?</a>
             </div>
 
             <div class="game-card" th:each="entry : ${collection}">

@@ -312,6 +312,19 @@ form.form-edit-profile,
     }
 }
 
+.games-link {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #cfe8ff;
+    text-decoration: none;
+    border-radius: 6px;
+}
+
+.games-link:hover {
+    background: rgb(77 163 255 / 0.02);
+    color: #ffffff;
+}
+
 @media (max-width: 1200px) {
 
     .collection-grid {

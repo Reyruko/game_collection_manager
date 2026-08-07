@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>The Game Vault | Add Games</title>
+    <link rel="stylesheet" th:href="@{/css/common.css}">
+    <link rel="stylesheet" th:href="@{/css/admin-panel.css}">
+</head>
+
+<body>
+<div th:insert="~{fragments/nav-bar :: header}"></div>
+
+<div class="content-wrapper">
+
+    <main>
+
+        <h2>Add New Game</h2>
+
+        <form class="add-game-form"
+              th:action="@{/manage/games/add}"
+              th:object="${game}"
+              method="post">
+
+            <input type="hidden"
+                   th:name="${_csrf.parameterName}"
+                   th:value="${_csrf.token}">
+
+            <table>
+
+                <tr>
+                    <th colspan="2">
+                        Game Information
+                    </th>
+                </tr>
+
+                <tr>
+                    <td>Game Name</td>
+                    <td>
+                        <input type="text"
+                               placeholder="Enter game name"
+                               th:field="*{name}">
+
+                        <p class="error"
+                           th:if="${#fields.hasErrors('name')}"
+                           th:errors="*{name}">
+                        </p>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>Description</td>
+                    <td>
+                    <textarea rows="5"
+                              placeholder="Enter Game Description"
+                              th:field="*{description}"></textarea>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>Genre</td>
+                    <td>
+                        <div class="checkbox-group">
+                            <div th:each="genre : ${genres}">
+                                <label>
+                                    <input type="checkbox"
+                                           th:field="*{genreIds}"
+                                           th:value="${genre.id}">
+                                    <span th:text="${genre.name}"></span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <p class="error"
+                           th:if="${#fields.hasErrors('genreIds')}"
+                           th:errors="*{genreIds}">
+                        </p>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>Platform</td>
+                    <td>
+                        <div class="checkbox-group">
+                            <div th:each="platform : ${platforms}">
+                                <label>
+                                    <input type="checkbox"
+                                           th:field="*{platformIds}"
+                                           th:value="${platform.id}">
+                                    <span th:text="${platform.name}"></span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <p class="error"
+                           th:if="${#fields.hasErrors('platformIds')}"
+                           th:errors="*{platformIds}">
+                        </p>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>Developer</td>
+                    <td>
+                        <input type="text" th:field="*{developer}"
+                        placeholder="Enter developer name">
+                    </td>
+
+                    <p class="error"
+                       th:if="${#fields.hasErrors('developer')}"
+                       th:errors="*{developer}">
+                    </p>
+                </tr>
+
+                <tr>
+                    <td>Publisher</td>
+                    <td>
+                        <input type="text" th:field="*{publisher}"
+                        placeholder="Enter publisher name">
+                    </td>
+
+                    <p class="error"
+                       th:if="${#fields.hasErrors('publisher')}"
+                       th:errors="*{publisher}">
+                    </p>
+                </tr>
+
+                <tr>
+                    <td>Release Date</td>
+                    <td>
+                        <input type="text"
+                               id="releaseDate"
+                               th:field="*{releaseDate}"
+                               placeholder="dd/MM/yyyy">
+                    </td>
+
+                    <p class="error"
+                       th:if="${#fields.hasErrors('releaseDate')}"
+                       th:errors="*{releaseDate}">
+                    </p>
+                </tr>
+
+                <tr>
+                    <td colspan="2">
+
+                        <div class="actions">
+
+                            <button type="submit" class="toggle-btn">
+                                Add Game
+                            </button>
+
+                            <a th:href="@{/manage/games}"
+                               class="collection-btn">
+                                Cancel
+                            </a>
+
+                        </div>
+
+                    </td>
+                </tr>
+
+            </table>
+
+        </form>
+
+    </main>
+
+</div>
+
+<div th:insert="~{fragments/footer :: footer}"></div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/inputmask/5.0.9/inputmask.min.js"></script>
+<script src="/js/date-mask.js"></script>
+</body>
+</html>

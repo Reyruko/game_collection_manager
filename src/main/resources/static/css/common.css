@@ -182,6 +182,10 @@ button{
     color: #c89a55;
 }
 
+form.add-game-form {
+    width: unset;
+}
+
 @media (max-width: 768px) {
 
     header {

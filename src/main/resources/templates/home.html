@@ -29,10 +29,17 @@
         <div class="games-container">
             <div class="games-grid">
                 <div th:each="game : ${latestGames}" class="game-card">
+
                     <h5>Name:</h5>
                     <h4 th:text="${game.name}"></h4>
-                    <h5>Genre:</h5>
-                    <p th:text="${game.genre}"></p>
+
+                    <h5>Genres:</h5>
+                    <div>
+                    <span th:each="genre, stat : ${game.genres}">
+                        <span th:text="${genre.name}"></span>
+                        <span th:if="${!stat.last}">, </span>
+                    </span>
+                    </div>
                 </div>
             </div>
         </div>
