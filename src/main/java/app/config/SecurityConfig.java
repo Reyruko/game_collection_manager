@@ -27,6 +27,9 @@ public class SecurityConfig {
                 .requestMatchers("/admin/**")
                 .hasRole("ADMIN")
 
+                .requestMatchers("/manage/games/**")
+                .hasAnyRole("ADMIN", "MODERATOR")
+
                 .requestMatchers("/games/**")
                 .authenticated()
 
