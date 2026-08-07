@@ -3,6 +3,8 @@ package app.service;
 import app.model.dto.game.GameCreateRequest;
 import app.model.dto.game.GameDTO;
 import app.model.dto.game.GameUpdateRequest;
+import app.model.dto.game.GenreDTO;
+import app.model.dto.game.PlatformDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.stereotype.Service;
@@ -41,5 +43,19 @@ public class GameApiService {
     public List<GameDTO> getLatestGames() {
         return gameRestClient.get().uri("/latest").retrieve().body(new ParameterizedTypeReference<List<GameDTO>>() {
         });
+    }
+
+    public List<GenreDTO> getAllGenres() {
+        return gameRestClient.get()
+                .uri("/genres")
+                .retrieve()
+                .body(new ParameterizedTypeReference<List<GenreDTO>>() {});
+    }
+
+    public List<PlatformDTO> getAllPlatforms() {
+        return gameRestClient.get()
+                .uri("/platforms")
+                .retrieve()
+                .body(new ParameterizedTypeReference<List<PlatformDTO>>() {});
     }
 }

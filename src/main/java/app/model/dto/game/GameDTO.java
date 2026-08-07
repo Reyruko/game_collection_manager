@@ -1,8 +1,6 @@
 package app.model.dto.game;
 
 
-import app.model.enums.Genre;
-import app.model.enums.Platform;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -10,6 +8,8 @@ import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.UUID;
 
 @Data
@@ -25,8 +25,8 @@ public class GameDTO {
     private String publisher;
     private String description;
     private LocalDate releaseDate;
-    private Genre genre;
-    private Platform platform;
+    private Set<GenreDTO> genres = new HashSet<>();
+    private Set<PlatformDTO> platforms = new HashSet<>();
     private BigDecimal hoursPlayed;
     private BigDecimal rating;
     private boolean favorite;
