@@ -40,13 +40,12 @@ public class ProfileController {
         String username = authentication.getName();
 
         UserDTO userDTO = userService.findByUsername(username);
-
-        List<UserGameProfileDTO> gameLibrary =
-                userGameService.getUserGames(username);
+        List<UserGameProfileDTO> gameLibrary = userGameService.getUserGames(username);
 
         ModelAndView modelAndView = new ModelAndView("profile");
         modelAndView.addObject("user", userDTO);
         modelAndView.addObject("collection", gameLibrary);
+        modelAndView.addObject("editGameLibraryRequest", new EditGameLibraryRequest());
 
         return modelAndView;
     }
@@ -60,9 +59,15 @@ public class ProfileController {
     }
 
     @PostMapping("/profile/edit")
-    public String updateProfile(@ModelAttribute("user") UserEditProfileRequest dto, Principal principal,
-            BindingResult bindingResult,
-            Model model) {
+    public String updateProfile(@Valid @ModelAttribute("user") UserEditProfileRequest dto,
+                                BindingResult bindingResult,
+                                Principal principal,
+                                Model model) {
+
+        if (bindingResult.hasErrors()) {
+            populateProfileEditModel(model, principal.getName());
+            return "profile-edit";
+        }
 
         try {
             userService.updateProfile(principal.getName(), dto);
@@ -100,12 +105,26 @@ public class ProfileController {
         }
     }
 
-    @PostMapping("gameLibrary/edit/{id}")
-    public String editGameStatus(@PathVariable UUID id,
-                                 EditGameLibraryRequest editGameLibraryRequest,
-                                 Principal principal) {
+    @PostMapping("/gameLibrary/edit/{id}")
+    public String editGameStatus(
+            @PathVariable UUID id,
+            @Valid @ModelAttribute("editGameLibraryRequest") EditGameLibraryRequest dto,
+            BindingResult bindingResult,
+            Principal principal,
+            Model model) {
 
-        userGameService.editGameLibrary(principal.getName(), id, editGameLibraryRequest);
+        if (bindingResult.hasErrors()) {
+            model.addAttribute("collection",
+                    userGameService.getUserGames(principal.getName()));
+
+            return "profile";
+        }
+
+        userGameService.editGameLibrary(
+                principal.getName(),
+                id,
+                dto
+        );
 
         return "redirect:/profile";
     }

@@ -42,6 +42,12 @@ public class UserGameService {
                             userGame.getId(),
                             userGame.getGameId(),
                             game.getName(),
+                            game.getDeveloper(),
+                            game.getPublisher(),
+                            game.getDescription(),
+                            game.getReleaseDate(),
+                            game.getGenres(),
+                            game.getPlatforms(),
                             userGame.getStatus(),
                             userGame.getHoursPlayed(),
                             userGame.getRating(),
@@ -93,29 +99,5 @@ public class UserGameService {
         userGameRepository.save(entry);
     }
 
-    public List<UserGameProfileDTO> getUserGamesWithDetails(String username) {
-
-        User user = userRepository.findByUsername(username)
-                .orElseThrow(UserNotFoundException::new);
-
-        return userGameRepository.findAllByUser(user)
-                .stream()
-                .map(userGame -> {
-
-                    GameDTO game = gameApiService.getGameById(userGame.getGameId());
-
-                    return new UserGameProfileDTO(
-                            game.getId(),
-                            game.getGameId(),
-                            game.getName(),
-                            userGame.getStatus(),
-                            userGame.getHoursPlayed(),
-                            userGame.getRating(),
-                            userGame.isFavorite()
-                    );
-
-                })
-                .toList();
-    }
 
 }

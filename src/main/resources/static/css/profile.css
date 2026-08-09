@@ -168,7 +168,9 @@ form.form-edit-profile,
 
 .collection-grid {
     display: grid;
-    grid-template-columns: repeat(5, 1fr);
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    justify-content: start;
+    align-items: start;
     gap: 20px;
     color: white;
 }
@@ -183,6 +185,8 @@ form.form-edit-profile,
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    box-sizing: border-box;
+    text-align: left;
 }
 
 .game-card:hover {
@@ -194,12 +198,14 @@ form.form-edit-profile,
     margin: 0 0 12px;
     color: white;
     font-size: 1.15rem;
+    text-align: left;
 }
 
 .game-card p {
     margin: 6px 0;
     color: #b5b5b5;
     font-size: 0.95rem;
+    text-align: left;
 }
 
 .game-card p:first-of-type {
@@ -325,7 +331,7 @@ form.form-edit-profile,
     color: #ffffff;
 }
 
-@media (max-width: 1200px) {
+@media (max-width: 768px) {
 
     .collection-grid {
         grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));

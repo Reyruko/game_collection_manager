@@ -30,121 +30,190 @@
         </div>
 
         <form class="form-edit-profile" th:action="@{/profile/edit}" method="get">
-        <button type="submit" class="edit-button">Edit Profile</button>
+            <button type="submit" class="edit-button">Edit Profile</button>
         </form>
     </section>
 
-<main class="profile-page">
-    <section class="account-info card">
-        <h3>Account Information</h3>
+    <main class="profile-page">
+        <section class="account-info card">
+            <h3>Account Information</h3>
 
-        <p>
-            Username:
-            <span th:text="${user.username}">adventurer123</span>
-        </p>
+            <p>
+                Username:
+                <span th:text="${user.username}">adventurer123</span>
+            </p>
 
-        <p>
-            Email:
-            <span th:text="${user.email}">ani@example.com</span>
-        </p>
+            <p>
+                Email:
+                <span th:text="${user.email}">ani@example.com</span>
+            </p>
 
-        <p>
-            Member Since:
-            <span th:text="${user.createdOn}">16 Jun 2026</span>
-        </p>
-    </section>
+            <p>
+                Member Since:
+                <span th:text="${user.createdOn}">16 Jun 2026</span>
+            </p>
+        </section>
 
-    <section class="collections-preview card">
+        <section class="collections-preview card">
 
-        <h3 class="section-title">My Collection</h3>
+            <h3 class="section-title">My Collection</h3>
 
-        <div class="collection-grid">
+            <div class="collection-grid">
 
-            <div th:if="${#lists.isEmpty(collection)}">
-                No games added yet. <a th:href="@{/games}" class="games-link">Browse Games?</a>
-            </div>
-
-            <div class="game-card" th:each="entry : ${collection}">
-
-                <div class="view-mode">
-
-                    <h4 th:text="${entry.name}"></h4>
-
-                    <p th:text="${entry.status}"></p>
-
+                <div th:if="${#lists.isEmpty(collection)}">
+                    No games added yet.
                     <p>
-                        Rating:
-                        <span th:text="${entry.rating}"></span>
+                        <a th:href="@{/games}" class="games-link">Browse Games?</a>
                     </p>
+                </div>
 
-                    <p>
-                        Hours:
-                        <span th:text="${entry.hoursPlayed}"></span>
-                    </p>
+                <div class="game-card" th:each="entry : ${collection}">
 
-                    <div class="button-container">
+                    <div class="view-mode">
 
-                    <button class="edit-btn"
-                            type="button"
-                            onclick="toggleEdit(this)">
-                        Edit
-                    </button>
+                        <h4 th:text="${entry.name}">Game Name</h4>
 
-                    <form class="remove-game-form" th:action="@{/gameLibrary/remove/{id}(id=${entry.gameId})}"
+                        <p class="game-dev">
+                            Developer:
+                            <span th:text="${entry.developer}">Developer</span>
+                        </p>
+
+                        <p class="game-publisher">
+                            Publisher:
+                            <span th:text="${entry.publisher}">Publisher</span>
+                        </p>
+
+                        <p class="game-description"
+                           th:text="${entry.description}">
+                            Game description.
+                        </p>
+
+                        <p class="game-release-date">
+                            Release date:
+                            <span th:text="${#temporals.format(entry.releaseDate, 'dd/MM/yyyy')}">
+                                 01/01/2025
+                            </span>
+                        </p>
+
+                        <div class="game-genres">
+                            <span>Genres:</span>
+
+                            <span th:each="genre, stat : ${entry.genres}">
+                            <span th:text="${genre.name}">RPG</span><span
+                                    th:if="${!stat.last}">, </span>
+                            </span>
+                        </div>
+
+                        <div class="game-platforms">
+                            <span>Platforms:</span>
+
+                            <span th:each="platform, stat : ${entry.platforms}">
+                            <span th:text="${platform.name}">PC</span><span
+                                    th:if="${!stat.last}">, </span>
+                            </span>
+                        </div>
+
+                        <hr>
+
+                        <p class="game-status">
+                            Status:
+                            <span th:text="${entry.status}">WISHLIST</span>
+                        </p>
+
+                        <p class="game-rating">
+                            Rating:
+                            <span th:text="${entry.rating != null ? entry.rating : 'Not rated'}">
+                             Not rated
+                            </span>
+                        </p>
+
+                        <p class="game-hours">
+                            Hours:
+                            <span th:text="${entry.hoursPlayed != null ? entry.hoursPlayed : '0'}">
+                            0
+                            </span>
+                        </p>
+
+                        <p class="game-favorite"
+                           th:if="${entry.favorite}">
+                            Favorite
+                        </p>
+
+                        <div class="button-container">
+
+                            <button class="edit-btn"
+                                    type="button"
+                                    onclick="toggleEdit(this)">
+                                Edit
+                            </button>
+
+                            <form class="remove-game-form"
+                                  th:action="@{/gameLibrary/remove/{id}(id=${entry.gameId})}"
+                                  method="post">
+
+                                <button class="remove-btn"
+                                        type="submit">
+                                    Remove
+                                </button>
+
+                            </form>
+
+                        </div>
+
+                    </div>
+
+                    <form class="edit-form hidden"
+                          th:action="@{/gameLibrary/edit/{id}(id=${entry.id})}"
+                          th:object="${editGameLibraryRequest}"
                           method="post">
 
-                        <button class="remove-btn"
-                                type="submit">
-                            Remove
+                        <h4 th:text="${entry.name}"></h4>
+
+                        <select th:field="*{status}">
+                            <option th:each="status : ${T(app.model.enums.GameStatus).values()}"
+                                    th:value="${status}"
+                                    th:text="${status}">
+                            </option>
+                        </select>
+
+                        <input type="number"
+                               min="0"
+                               max="10"
+                               step="0.1"
+                               th:field="*{rating}"
+                               placeholder="Add rating">
+
+                        <div class="field-error"
+                             th:if="${#fields.hasErrors('rating')}"
+                             th:errors="*{rating}">
+                        </div>
+
+                        <input type="number"
+                               min="0"
+                               th:field="*{hoursPlayed}"
+                               placeholder="Hours played">
+
+                        <div class="field-error"
+                             th:if="${#fields.hasErrors('hoursPlayed')}"
+                             th:errors="*{hoursPlayed}">
+                        </div>
+
+                        <button class="save-btn" type="submit">
+                            Save
+                        </button>
+
+                        <button class="cancel-btn" type="button"
+                                onclick="toggleEdit(this)">
+                            Cancel
                         </button>
 
                     </form>
 
-                    </div>
-
                 </div>
-
-                <form class="edit-form hidden" th:action="@{/gameLibrary/edit/{id}(id=${entry.id})}" method="post">
-
-                    <h4 th:text="${entry.name}"></h4>
-
-                    <select name="status">
-                        <option th:each="status : ${T(app.model.enums.GameStatus).values()}"
-                                th:value="${status}"
-                                th:text="${status}"
-                                th:selected="${status == entry.status}">
-                        </option>
-                    </select>
-
-                    <input type="number"
-                           min="0"
-                           max="10"
-                           step="0.1"
-                           name="rating"
-                           placeholder="Add rating"
-                           th:value="${entry.rating}">
-
-                    <input type="number"
-                           name="hoursPlayed"
-                           placeholder="Hours played"
-                           th:value="${entry.hoursPlayed}">
-
-                    <button class="save-btn" type="submit">
-                        Save
-                    </button>
-
-                    <button class="cancel-btn" type="button"
-                            onclick="toggleEdit(this)">
-                        Cancel
-                    </button>
-
-                </form>
-
             </div>
-        </div>
 
-    </section>
-</main>
+        </section>
+    </main>
 </div>
 
 <div th:insert="~{fragments/footer :: footer}"></div>
