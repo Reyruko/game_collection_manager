@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+
+<head>
+    <title>The Game Vault | Games</title>
+    <link rel="stylesheet" th:href="@{/css/common.css}">
+    <link rel="stylesheet" th:href="@{/css/error.css}">
+</head>
+
+<body>
+<div th:insert="~{fragments/nav-bar :: header}"></div>
+
+<main class="error-page">
+
+    <section class="error-card">
+
+        <span class="error-icon">⚠️</span>
+
+        <h1 th:text="${status}">500</h1>
+
+        <h2>Something went wrong</h2>
+
+        <p th:text="${error}">
+            Something unexpected happened.
+        </p>
+
+        <a th:href="@{/home}" class="error-button">
+            Return to the Vault
+        </a>
+
+    </section>
+
+</main>
+
+<div th:insert="~{fragments/footer :: footer}"></div>
+
+</body>
+</html>
