@@ -1,14 +1,9 @@
 package app.service;
 
-import app.model.dto.game.GameCreateRequest;
-import app.model.dto.game.GameDTO;
-import app.model.dto.game.GameUpdateRequest;
-import app.model.dto.game.GenreDTO;
-import app.model.dto.game.PlatformDTO;
+import app.game.GameClient;
+import app.model.dto.game.*;
 import lombok.RequiredArgsConstructor;
-import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestClient;
 
 import java.util.List;
 import java.util.UUID;
@@ -17,9 +12,49 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class GameApiService {
 
-    private final RestClient gameRestClient;
+    private final GameClient gameClient;
 
     public List<GameDTO> getAllGames() {
+        return gameClient.getAllGames();
+    }
+
+    public GameDTO getGameById(UUID id) {
+        return gameClient.getGameById(id);
+    }
+
+    public GameDTO createGame(GameCreateRequest request) {
+        return gameClient.createGame(request);
+    }
+
+    public GameDTO updateGame(UUID id, GameUpdateRequest request) {
+        return gameClient.updateGame(id, request);
+    }
+
+    public void deleteGame(UUID id) {
+        gameClient.deleteGame(id);
+    }
+
+    public List<GameDTO> getLatestGames() {
+        return gameClient.getLatestGames();
+    }
+
+    public List<GenreDTO> getAllGenres() {
+        return gameClient.getAllGenres();
+    }
+
+    public List<PlatformDTO> getAllPlatforms() {
+        return gameClient.getAllPlatforms();
+    }
+
+    public GenreDTO createGenre(GenreCreateRequest request) {
+        return gameClient.createGenre(request);
+    }
+
+    public PlatformDTO createPlatform(PlatformCreateRequest request) {
+        return gameClient.createPlatform(request);
+    }
+
+    /*public List<GameDTO> getAllGames() {
         return gameRestClient.get().retrieve().body(new ParameterizedTypeReference<List<GameDTO>>() {
         });
     }
@@ -29,7 +64,19 @@ public class GameApiService {
     }
 
     public GameDTO createGame(GameCreateRequest request) {
-        return gameRestClient.post().body(request).retrieve().body(GameDTO.class);
+        try {
+            return gameRestClient
+                    .post()
+                    .body(request)
+                    .retrieve()
+                    .body(GameDTO.class);
+
+        } catch (HttpClientErrorException ex) {
+            throw new GameApiException(
+                    ex.getStatusCode().value(),
+                    ex.getResponseBodyAsString()
+            );
+        }
     }
 
     public GameDTO updateGame(UUID id, GameUpdateRequest request) {
@@ -58,4 +105,24 @@ public class GameApiService {
                 .retrieve()
                 .body(new ParameterizedTypeReference<List<PlatformDTO>>() {});
     }
+
+    public GenreDTO createGenre(GenreCreateRequest request) {
+
+        return gameRestClient
+                .post()
+                .uri("/genres")
+                .body(request)
+                .retrieve()
+                .body(GenreDTO.class);
+    }
+
+    public PlatformDTO createPlatform(PlatformCreateRequest request) {
+
+        return gameRestClient
+                .post()
+                .uri("/platforms")
+                .body(request)
+                .retrieve()
+                .body(PlatformDTO.class);
+    }*/
 }

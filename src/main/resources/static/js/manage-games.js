@@ -63,7 +63,8 @@ async function saveGame(button) {
     console.log("Sending:", request);
 
     try {
-        const csrfToken = document.querySelector("#csrf-token").value;
+        const csrfToken = document.querySelector('meta[name="_csrf"]').content;
+        const csrfHeader = document.querySelector('meta[name="_csrf_header"]').content;
 
         const response = await fetch(
             `/manage/games/edit/${gameId}`,
@@ -73,7 +74,7 @@ async function saveGame(button) {
                 headers: {
                     "Content-Type": "application/json",
                     "Accept": "application/json",
-                    "X-CSRF-TOKEN": csrfToken
+                    [csrfHeader]: csrfToken
                 },
 
                 body: JSON.stringify(request)

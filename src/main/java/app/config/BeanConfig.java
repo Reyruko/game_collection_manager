@@ -20,11 +20,4 @@ public class BeanConfig {
         return new ModelMapper();
     }
 
-    @Bean
-    public RestClient gameRestClient() {
-        return RestClient.builder()
-                .baseUrl("http://localhost:8081/api/games")
-                .build();
-    }
-
 }
