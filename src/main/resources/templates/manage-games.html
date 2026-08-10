@@ -4,12 +4,18 @@
 <head>
     <title>The Game Vault | Manage Games</title>
     <link rel="stylesheet" th:href="@{/css/common.css}">
-    <link rel="stylesheet" th:href="@{/css/games.css}">
+    <link rel="stylesheet" th:href="@{/css/manage-games.css}">
     <script th:src="@{/js/submit.js}" defer></script>
+    <script th:src="@{/js/manage-games.js}"></script>
 </head>
 
 <body>
 <div th:insert="~{fragments/nav-bar :: header}"></div>
+
+<input type="hidden"
+       id="csrf-token"
+       th:name="${_csrf.parameterName}"
+       th:value="${_csrf.token}">
 
 <main class="games-library">
 
@@ -20,6 +26,7 @@
             Add Game
         </a>
     </div>
+
     <table class="games-table">
         <tbody>
         <tr class="table-header">
@@ -29,46 +36,199 @@
             <td class="status">Status</td>
             <td class="edit-games">Edit</td>
         </tr>
-        <tr class="ranking-list" th:each="game, stat : ${games}">
+
+        <tr class="ranking-list game-row"
+            th:each="game, stat : ${games}"
+            th:data-game-id="${game.id}">
+
             <td class="rank tc" th:text="${stat.count}">1</td>
+
             <td class="title tc">
-                <div class="detail">
-                    <h3 class="game-name" th:text="${game.name}">
+                <div class="view-mode">
+                    <div class="detail">
+                        <h3 class="game-name" th:text="${game.name}">
                         Game Name
-                    </h3>
-                    <p class="game-desc" th:text="${game.description}">
-                        Game Description here.
-                    </p>
-                    <p class="platform">
-                        <span th:each="platform, stat : ${game.platforms}">
-                            <span th:text="${platform.name}"></span>
-                            <span th:if="${!stat.last}"> / </span>
-                        </span>
-                    </p>
+                        </h3>
+
+                        <p class="game-dev" th:text="${game.developer}">
+                            Game Developer here.
+                        </p>
+
+                        <p class="game-publisher" th:text="${game.publisher}">
+                            Game publisher here.
+                        </p>
+
+                        <p class="game-desc" th:text="${game.description}">
+                            Game Description here.
+                        </p>
+
+                        <p class="game-release-date" th:text="${game.releaseDate}">
+                            Game release date here.
+                        </p>
+
+                        <p class="game-genres" >
+                            <span th:each="genre, stat : ${game.genres}">
+                                <span th:text="${genre.name}">Survival</span><span th:if="${!stat.last}">, </span>
+                            </span>
+                        </p>
+
+                        <p class="platform">
+                            <span th:each="platform, stat : ${game.platforms}">
+                                <span th:text="${platform.name}">PC</span><span th:if="${!stat.last}">/ </span>
+                            </span>
+                        </p>
+                    </div>
+                </div>
+
+                <div class="edit-form hidden">
+
+                    <div class="edit-field">
+
+                        <label>
+                            Name
+                        </label>
+
+                        <input type="text"
+                               class="game-name-input"
+                               th:value="${game.name}">
+
+                    </div>
+
+                    <div class="edit-field">
+
+                        <label>
+                            Description
+                        </label>
+
+                        <textarea class="game-description-input"
+                                  th:text="${game.description}">
+                    </textarea>
+
+                    </div>
+
+                    <div class="edit-field">
+
+                        <label>
+                            Release Date
+                        </label>
+
+                        <input type="text"
+                               class="game-release-date-input"
+                               th:value="${#temporals.format(game.releaseDate, 'dd/MM/yyyy')}"
+                               placeholder="dd/MM/yyyy">
+                    </div>
+
+                    <div class="edit-field">
+
+                        <label>
+                            Genres
+                        </label>
+
+                        <div class="genre-list">
+
+                            <label th:each="genre : ${genres}">
+
+                                <input type="checkbox"
+                                       class="genre-checkbox"
+                                       th:value="${genre.id}"
+                                       th:checked="${game.genres.contains(genre)}">
+
+                                <span th:text="${genre.name}">
+                                RPG
+                            </span>
+
+                            </label>
+
+                        </div>
+                    </div>
+
+                    <div class="edit-field">
+
+                        <label>
+                            Platforms
+                        </label>
+
+                        <div class="platform-list">
+
+                            <label th:each="platform : ${platforms}">
+
+                                <input type="checkbox"
+                                       class="platform-checkbox"
+                                       th:value="${platform.id}"
+                                       th:checked="${game.platforms.contains(platform)}">
+
+                                <span th:text="${platform.name}">
+                                PC
+                            </span>
+
+                            </label>
+
+                        </div>
+                    </div>
+
                 </div>
             </td>
-            <td class="score tc" th:text="${game.rating}">
-                9.81
+
+            <td class="score tc">
+
+                <div class="view-mode"
+                     th:text="${game.rating}">
+                    9.81
+                </div>
+
+                <div class="edit-form hidden">
+
+                    <input type="number"
+                           class="game-rating-input"
+                           step="0.01"
+                           min="0"
+                           max="10"
+                           th:value="${game.rating}">
+                </div>
             </td>
+
             <td class="status tc">
                 <form class="collection-form" th:action="@{/games/{id}/add(id=${game.id})}" method="post">
+
                     <input type="hidden"
                            th:name="${_csrf.parameterName}"
                            th:value="${_csrf.token}">
+
                     <button type="submit">
                         Add to Collection
                     </button>
+
                 </form>
             </td>
+
             <td class="edit-games tc">
-                <form class="collection-form" th:action="@{/games/{id}/edit(id=${game.id})}" method="post">
-                    <input type="hidden"
-                           th:name="${_csrf.parameterName}"
-                           th:value="${_csrf.token}">
-                    <button type="submit">
-                        Edit Game
+
+                <div class="view-mode">
+
+                    <button type="button"
+                            class="edit-game-btn"
+                            onclick="toggleGameEdit(this)">
+                        Edit
                     </button>
-                </form>
+
+                </div>
+
+                <div class="edit-form hidden">
+
+                    <button type="button"
+                            class="save-game-btn"
+                            onclick="saveGame(this)">
+                        Save
+                    </button>
+
+                    <button type="button"
+                            class="cancel-game-btn"
+                            onclick="cancelGameEdit(this)">
+                        Cancel
+                    </button>
+
+                </div>
+
             </td>
         </tr>
         </tbody>

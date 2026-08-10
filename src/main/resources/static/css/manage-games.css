@@ -1,0 +1,345 @@
+body {
+    background:
+            linear-gradient(
+                    rgba(0, 0, 0, 0.65),
+                    rgba(0, 0, 0, 0.80)
+            ),
+            url("../images/empty-map.png");
+
+    background-size: cover;
+}
+
+body {
+    background-position: center;
+}
+
+.header-container {
+    all: unset;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin: 1em;
+}
+
+.header-container h2 {
+    color: white;
+    margin: 0;
+}
+
+.add-game-btn {
+    padding: 8px 14px;
+    border-radius: 8px;
+    text-decoration: none;
+    color: white;
+    background: linear-gradient(
+            135deg,
+            #6a5acd,
+            #3a86ff
+    );
+    font-size: 0.9rem;
+    transition: 0.2s ease;
+}
+
+.add-game-btn:hover {
+    transform: scale(1.05);
+    filter: brightness(1.1);
+}
+
+.games-library {
+    width: 90%;
+    margin: 40px auto;
+    color: #ddd;
+}
+
+.games-table {
+    width: 100%;
+    margin: 40px auto;
+    color: #ddd;
+    border-collapse: collapse;
+    table-layout: fixed;
+    background: rgb(18 18 28 / 57%);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.table-header td {
+    padding: 16px;
+    background: rgba(35, 35, 50, 0.95);
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: #bcbcbc;
+    text-transform: uppercase;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.08);
+}
+
+.ranking-list {
+    transition: 0.2s;
+}
+
+.ranking-list:hover {
+    background: rgba(45, 45, 65, 0.5);
+}
+
+.ranking-list td {
+    padding: 18px 16px;
+    vertical-align: top;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.rank,
+.title,
+.score,
+.status,
+.edit-games {
+    border-right: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.rank {
+    width: 80px;
+    text-align: center;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #8fc4ff;
+}
+
+.title {
+    width: auto;
+    text-align: left;
+}
+
+.score {
+    width: 120px;
+    text-align: center;
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: #ffd26a;
+}
+
+.status {
+    width: 180px;
+    text-align: center;
+}
+
+.edit-games {
+    width: 180px;
+    text-align: center;
+}
+
+.detail {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+}
+
+.game-name {
+    margin: 0;
+    font-size: 1.15rem;
+    color: white;
+}
+
+.game-desc {
+    margin: 0;
+    color: #a8a8a8;
+    font-size: 0.9rem;
+    line-height: 1.5;
+}
+
+.platform {
+    margin: 0;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: #6fa7ff;
+    text-transform: uppercase;
+}
+
+.collection-form {
+    all: unset;
+    display: flex;
+    justify-content: center;
+}
+
+.collection-form button {
+    padding: 8px 14px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    color: white;
+    background: linear-gradient(
+            135deg,
+            #6a5acd,
+            #3a86ff
+    );
+
+    transition: 0.2s ease;
+}
+
+.collection-form button:hover {
+    transform: scale(1.05);
+    filter: brightness(1.1);
+}
+
+.edit-game-btn,
+.save-game-btn,
+.cancel-game-btn {
+    padding: 8px 14px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 0.85rem;
+    transition: 0.2s ease;
+}
+
+.edit-game-btn {
+    color: white;
+    background: linear-gradient(
+            135deg,
+            #6a5acd,
+            #3a86ff
+    );
+}
+
+.edit-game-btn:hover,
+.save-game-btn:hover,
+.cancel-game-btn:hover {
+    transform: scale(1.05);
+    filter: brightness(1.1);
+}
+
+.hidden {
+    display: none !important;
+}
+
+.edit-form {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 10px;
+    text-align: left;
+}
+
+.edit-field {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.edit-field label {
+    color: #bcbcbc;
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
+.edit-field input,
+.edit-field textarea {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 8px 10px;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 7px;
+    outline: none;
+    background: rgba(255, 255, 255, 0.95);
+    color: #111;
+    font-family: inherit;
+}
+
+.edit-field input:focus,
+.edit-field textarea:focus {
+    border-color: #6fa7ff;
+}
+
+.edit-field textarea {
+    min-height: 80px;
+    resize: vertical;
+}
+
+.genre-list,
+.platform-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px 10px;
+}
+
+.genre-list label,
+.platform-list label {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 4px;
+    color: #ddd;
+    font-size: 0.8rem;
+    cursor: pointer;
+}
+
+.genre-list input,
+.platform-list input {
+    width: auto;
+}
+
+.save-game-btn {
+    color: white;
+    background: linear-gradient(
+            135deg,
+            #4caf50,
+            #2e7d32
+    );
+}
+
+.cancel-game-btn {
+    color: white;
+    background: linear-gradient(
+            135deg,
+            #777,
+            #444
+    );
+}
+
+.edit-actions {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 8px;
+}
+
+.ranking-list:last-child td {
+    border-bottom: none;
+}
+
+@media (max-width: 768px) {
+
+    .title {
+        width: auto;
+    }
+
+    .game-desc {
+        max-width: 100%;
+    }
+
+    .ranking-list td {
+        padding: 0.75rem;
+    }
+
+    .games-table {
+        font-size: 0.85rem;
+    }
+
+    .rank {
+        width: 50px;
+    }
+
+    .score {
+        width: 80px;
+    }
+
+    .status,
+    .edit-games {
+        width: 110px;
+    }
+
+    .edit-field input,
+    .edit-field textarea {
+        font-size: 0.85rem;
+    }
+}

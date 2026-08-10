@@ -1,0 +1,370 @@
+body {
+    background:
+            linear-gradient(
+                    rgba(0, 0, 0, 0.65),
+                    rgba(0, 0, 0, 0.80)
+            ),
+            url("../images/empty-map.png");
+
+    background-size: cover;
+}
+
+body {
+    background-position: center;
+    background-attachment: fixed;
+}
+
+main {
+    max-width: 1000px;
+    margin: 60px auto;
+    padding: 30px;
+    color: white;
+}
+
+.add-game-form {
+    width: 100%;
+}
+
+.side-form {
+    display: inline-flex;
+    flex-direction: column;
+    vertical-align: top;
+
+    width: calc(50% - 10px);
+    padding: 22px;
+    box-sizing: border-box;
+
+    background: rgb(25 25 35 / 70%);
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+#add-genre-form {
+    margin-right: 16px;
+}
+
+.side-form h3 {
+    margin: 0 0 18px;
+    color: #ffd369;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 1rem;
+}
+
+.side-form input[type="text"] {
+    width: 100%;
+    padding: 12px;
+    box-sizing: border-box;
+
+    border: none;
+    border-radius: 8px;
+
+    background: rgba(255, 255, 255, 0.92);
+    color: #222;
+
+    font-size: 0.95rem;
+}
+
+.side-form input[type="text"]:focus {
+    outline: 2px solid #7b5cff;
+    background: white;
+}
+
+.side-form .error {
+    margin: 8px 0 0;
+}
+
+.side-form .success-message {
+    margin: 10px 0 0;
+}
+
+.side-form .toggle-btn {
+    width: 100%;
+    margin-top: 14px;
+}
+
+#add-genre-form,
+#add-platform-form {
+    display: inline-block;
+    width: calc(50% - 10px);
+    vertical-align: top;
+}
+
+#add-genre-form {
+    margin-right: 16px;
+}
+
+main h2 {
+    text-align: center;
+    font-size: 2.2rem;
+    margin-bottom: 30px;
+    letter-spacing: 2px;
+}
+
+.add-game-form table {
+    width: 100%;
+    border-collapse: collapse;
+    background: rgb(25 25 35 / 60%);
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.add-game-form th {
+    padding: 18px;
+    background: #2b2440;
+    color: #ffd369;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+    letter-spacing: 1px;
+}
+
+.add-game-form td {
+    padding: 18px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.add-game-form tr:last-child td {
+    border-bottom: none;
+}
+
+.add-game-form td:first-child {
+    width: 25%;
+    font-weight: 700;
+    color: #ffd369;
+}
+
+.add-game-form input[type="text"],
+.add-game-form textarea {
+    width: 100%;
+    padding: 12px;
+    border-radius: 8px;
+    border: none;
+    box-sizing: border-box;
+    background: rgba(255, 255, 255, 0.92);
+    color: #222;
+    font-size: 0.95rem;
+}
+
+.add-game-form input[type="text"]:focus,
+.add-game-form textarea:focus {
+    outline: 2px solid #7b5cff;
+    background: white;
+}
+
+.add-game-form textarea {
+    resize: vertical;
+    min-height: 120px;
+    font-family: inherit;
+}
+
+.checkbox-group {
+    display: grid;
+    grid-template-columns: repeat(3, max-content);
+    gap: 12px 30px;
+    justify-content: center;
+}
+
+.checkbox-group label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+}
+
+.checkbox-group input[type="checkbox"] {
+    width: 16px;
+    height: 16px;
+    cursor: pointer;
+}
+
+.error {
+    margin: 8px 0 0;
+    color: #ff6b6b;
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
+.actions {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 5px;
+}
+
+.toggle-btn {
+    background: linear-gradient(135deg, #7b5cff, #4b7cff);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: 700;
+    transition: 0.25s;
+}
+
+.toggle-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(123, 92, 255, 0.4);
+}
+
+.toggle-btn:active {
+    transform: scale(0.96);
+}
+
+.collection-btn {
+    display: inline-block;
+    background: #3d4766;
+    color: white;
+    text-decoration: none;
+    padding: 10px 18px;
+    border-radius: 10px;
+    transition: 0.2s;
+}
+
+.collection-btn:hover {
+    background: #56648d;
+}
+
+.add-option-form{
+    all: unset;
+}
+
+.success-message {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    color: #7bc381;
+}
+
+.error-message {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    color: #ff6b6b;
+    margin-bottom: 20px;
+    font-weight: 700;
+}
+
+@media (max-width: 768px) {
+
+    main {
+        margin: 30px auto;
+        padding: 15px;
+    }
+
+    .add-game-form table {
+        font-size: 0.9rem;
+    }
+
+    .add-game-form td {
+        padding: 12px;
+    }
+
+    .add-game-form td:first-child {
+        width: auto;
+    }
+
+    .checkbox-group {
+        grid-template-columns: repeat(2, max-content);
+        gap: 10px 20px;
+    }
+
+    .actions {
+        flex-direction: column;
+    }
+
+    .toggle-btn,
+    .collection-btn {
+        width: 100%;
+        box-sizing: border-box;
+        text-align: center;
+    }
+}
+
+@media (max-width: 600px) {
+
+    .add-game-form {
+        width: 95%;
+    }
+
+    .add-game-form table,
+    .add-game-form tbody,
+    .add-game-form tr,
+    .add-game-form td {
+        display: block;
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    .add-game-form tr {
+        padding: 8px 0;
+    }
+
+    .add-game-form td:first-child {
+        padding-bottom: 5px;
+        font-size: 0.95rem;
+    }
+
+    .add-game-form td:last-child {
+        padding-top: 5px;
+    }
+
+    .add-game-form th {
+        display: block;
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    .checkbox-group {
+        grid-template-columns: 1fr;
+    }
+
+    .actions {
+        flex-direction: column;
+        width: 100%;
+        gap: 10px;
+    }
+
+    .actions button,
+    .actions a {
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    .success-message {
+        width: 95%;
+        flex-direction: column;
+        align-items: stretch;
+        text-align: center;
+        gap: 12px;
+    }
+
+    .success-message .collection-btn {
+        width: 100%;
+        box-sizing: border-box;
+    }
+}
+
+@media (max-width: 400px) {
+
+    .add-game-form {
+        width: 98%;
+    }
+
+    .add-game-form td {
+        padding: 9px;
+    }
+
+    .add-game-form input[type="text"],
+    .add-game-form textarea {
+        font-size: 0.95rem;
+        padding: 9px;
+    }
+
+    .add-game-form th {
+        font-size: 1.1rem;
+    }
+}

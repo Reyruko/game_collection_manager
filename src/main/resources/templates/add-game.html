@@ -4,7 +4,9 @@
 <head>
     <title>The Game Vault | Add Games</title>
     <link rel="stylesheet" th:href="@{/css/common.css}">
-    <link rel="stylesheet" th:href="@{/css/admin-panel.css}">
+    <link rel="stylesheet" th:href="@{/css/add-game.css}">
+    <meta name="_csrf" th:content="${_csrf.token}">
+    <meta name="_csrf_header" th:content="${_csrf.headerName}">
 </head>
 
 <body>
@@ -15,6 +17,22 @@
     <main>
 
         <h2>Add New Game</h2>
+
+        <div class="success-message"
+             th:if="${success}">
+            <p>Game successfully added!</p>
+
+            <a th:href="@{/manage/games}"
+               class="collection-btn">
+                Back to Games
+            </a>
+        </div>
+
+        <div th:if="${gameError}"
+             class="error-message">
+
+            <p th:text="${gameError}"></p>
+        </div>
 
         <form class="add-game-form"
               th:action="@{/manage/games/add}"
@@ -53,13 +71,18 @@
                     <textarea rows="5"
                               placeholder="Enter Game Description"
                               th:field="*{description}"></textarea>
+
+                        <p class="error"
+                           th:if="${#fields.hasErrors('description')}"
+                           th:errors="*{description}">
+                        </p>
                     </td>
                 </tr>
 
                 <tr>
                     <td>Genre</td>
                     <td>
-                        <div class="checkbox-group">
+                        <div class="checkbox-group genre-checkbox-group">
                             <div th:each="genre : ${genres}">
                                 <label>
                                     <input type="checkbox"
@@ -80,7 +103,7 @@
                 <tr>
                     <td>Platform</td>
                     <td>
-                        <div class="checkbox-group">
+                        <div class="checkbox-group platform-checkbox-group">
                             <div th:each="platform : ${platforms}">
                                 <label>
                                     <input type="checkbox"
@@ -95,6 +118,7 @@
                            th:if="${#fields.hasErrors('platformIds')}"
                            th:errors="*{platformIds}">
                         </p>
+
                     </td>
                 </tr>
 
@@ -103,12 +127,12 @@
                     <td>
                         <input type="text" th:field="*{developer}"
                         placeholder="Enter developer name">
-                    </td>
 
-                    <p class="error"
-                       th:if="${#fields.hasErrors('developer')}"
-                       th:errors="*{developer}">
-                    </p>
+                        <p class="error"
+                           th:if="${#fields.hasErrors('developer')}"
+                           th:errors="*{developer}">
+                        </p>
+                    </td>
                 </tr>
 
                 <tr>
@@ -116,12 +140,12 @@
                     <td>
                         <input type="text" th:field="*{publisher}"
                         placeholder="Enter publisher name">
-                    </td>
 
-                    <p class="error"
-                       th:if="${#fields.hasErrors('publisher')}"
-                       th:errors="*{publisher}">
-                    </p>
+                        <p class="error"
+                           th:if="${#fields.hasErrors('publisher')}"
+                           th:errors="*{publisher}">
+                        </p>
+                    </td>
                 </tr>
 
                 <tr>
@@ -131,17 +155,16 @@
                                id="releaseDate"
                                th:field="*{releaseDate}"
                                placeholder="dd/MM/yyyy">
-                    </td>
 
-                    <p class="error"
-                       th:if="${#fields.hasErrors('releaseDate')}"
-                       th:errors="*{releaseDate}">
-                    </p>
+                        <p class="error"
+                           th:if="${#fields.hasErrors('releaseDate')}"
+                           th:errors="*{releaseDate}">
+                        </p>
+                    </td>
                 </tr>
 
                 <tr>
                     <td colspan="2">
-
                         <div class="actions">
 
                             <button type="submit" class="toggle-btn">
@@ -154,14 +177,76 @@
                             </a>
 
                         </div>
-
                     </td>
                 </tr>
-
             </table>
-
         </form>
 
+        <form id="add-genre-form"
+              class="side-form"
+              th:action="@{/manage/games/genres/add}"
+              th:object="${genre}"
+              method="post">
+
+            <input type="hidden"
+                   th:name="${_csrf.parameterName}"
+                   th:value="${_csrf.token}">
+
+            <h3>Add New Genre</h3>
+
+            <input type="text"
+                   id="genre-name"
+                   th:field="*{name}"
+                   placeholder="Enter genre name">
+
+            <p class="error"
+               th:if="${#fields.hasErrors('name')}"
+               th:errors="*{name}">
+            </p>
+
+            <p class="success-message"
+               th:if="${genreSuccess}"
+               th:text="${genreSuccess}">
+            </p>
+
+            <button type="submit"
+                    class="toggle-btn">
+                Add Genre
+            </button>
+        </form>
+
+        <form id="add-platform-form"
+              class="side-form"
+              th:action="@{/manage/games/platforms/add}"
+              th:object="${platform}"
+              method="post">
+
+            <input type="hidden"
+                   th:name="${_csrf.parameterName}"
+                   th:value="${_csrf.token}">
+
+            <h3>Add New Platform</h3>
+
+            <input type="text"
+                   id="platform-name"
+                   th:field="*{name}"
+                   placeholder="Enter platform name">
+
+            <p class="error"
+               th:if="${#fields.hasErrors('name')}"
+               th:errors="*{name}">
+            </p>
+
+            <p class="success-message"
+               th:if="${platformSuccess}"
+               th:text="${platformSuccess}">
+            </p>
+
+            <button type="submit"
+                    class="toggle-btn">
+                Add Platform
+            </button>
+        </form>
     </main>
 
 </div>
