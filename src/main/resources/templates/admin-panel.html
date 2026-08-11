@@ -19,6 +19,7 @@
                 <th>User</th>
                 <th>Games</th>
                 <th>Status</th>
+                <th>Role</th>
                 <th>Actions</th>
             </tr>
 
@@ -28,6 +29,8 @@
                 <td th:text="${user.gamesCount}"></td>
 
                 <td th:text="${user.active ? 'Active' : 'Inactive'}"></td>
+
+                <td th:text="${user.role}"></td>
 
                 <td class="actions">
 
@@ -43,7 +46,7 @@
 
                     <form class="promote-admin-form"
                           th:if="${user.role.name() != 'ADMIN'}"
-                          th:action="@{/admin/promote/{id}(id=${user.id})}" method="post">
+                          th:action="@{/admin/promote/admin/{id}(id=${user.id})}" method="post">
 
                         <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
 
@@ -52,16 +55,43 @@
                         </button>
                     </form>
 
+                    <form class="promote-moderator-form"
+                          th:if="${user.role.name() == 'USER'}"
+                          th:action="@{/admin/promote/moderator/{id}(id=${user.id})}"
+                          method="post">
+
+                        <input type="hidden"
+                               th:name="${_csrf.parameterName}"
+                               th:value="${_csrf.token}">
+
+                        <button type="submit" class="moderator-btn">
+                            Make Moderator
+                        </button>
+                    </form>
+
+                    <form class="demote-moderator-form"
+                          th:if="${user.role.name() == 'MODERATOR'}"
+                          th:action="@{/admin/demote/moderator/{id}(id=${user.id})}"
+                          method="post">
+
+                        <input type="hidden"
+                               th:name="${_csrf.parameterName}"
+                               th:value="${_csrf.token}">
+
+                        <button type="submit" class="demote-btn">
+                            Remove Moderator
+                        </button>
+                    </form>
                 </td>
             </tr>
         </table>
 
         <section class="game-manager">
-
-            <a th:href="@{/games}" class="games-link">Browse Games</a>
-
+            <button type="button" class="manage-games-btn"
+                    onclick="location.href='/manage/games'">
+            Manage Games
+            </button>
         </section>
-
     </div>
 
 </main>

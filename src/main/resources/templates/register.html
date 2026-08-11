@@ -32,6 +32,10 @@
                     placeholder="Email">
 
             <div class="error"
+                 th:if="${emailError}"
+                 th:text="${emailError}">
+            </div>
+            <div class="error"
                  th:if="${#fields.hasErrors('email')}"
                  th:errors="*{email}">
             </div>

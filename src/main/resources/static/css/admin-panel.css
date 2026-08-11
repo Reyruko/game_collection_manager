@@ -35,7 +35,9 @@ table {
 
 .active-status-form,
 .promote-admin-form,
-.demote-admin-form {
+.demote-admin-form,
+.promote-moderator-form,
+.demote-moderator-form {
     all: unset;
     display: inline;
     background: rgba(0, 0, 0, 0.65);
@@ -104,9 +106,19 @@ tr:last-child td {
     background: #56648d;
 }
 
-.admin-btn {
+.admin-btn,
+.manage-games-btn {
     background: #d98f00;
     color: white;
+    border: none;
+    padding: 10px 16px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.demote-btn {
+    background: #bc2909;
+    color: #ffffff;
     border: none;
     padding: 10px 16px;
     border-radius: 8px;

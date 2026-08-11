@@ -28,10 +28,24 @@ public class AdminService {
         userRepository.save(user);
     }
 
-    public void promoteUser(UUID userId) {
+    public void promoteToAdmin(UUID userId) {
         User user = userRepository.findById(userId).orElseThrow(UserNotFoundException::new);
 
         user.setRole(UserRole.ADMIN);
+        userRepository.save(user);
+    }
+
+    public void promoteToModerator(UUID userId) {
+        User user = userRepository.findById(userId).orElseThrow(UserNotFoundException::new);
+
+        user.setRole(UserRole.MODERATOR);
+        userRepository.save(user);
+    }
+
+    public void demoteModerator(UUID userId) {
+        User user = userRepository.findById(userId).orElseThrow(UserNotFoundException::new);
+
+        user.setRole(UserRole.USER);
         userRepository.save(user);
     }
 
