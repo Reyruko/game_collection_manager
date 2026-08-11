@@ -1,5 +1,6 @@
 package app.exception;
 
+import feign.FeignException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -117,5 +118,17 @@ public class GlobalExceptionHandler {
         return "error";
     }
 
+    @ExceptionHandler(FeignException.class)
+    public String handleFeignException(
+            FeignException ex,
+            Model model) {
+
+        logger.warn("Game service error: {}", ex.getMessage());
+
+        model.addAttribute("error", ex.getMessage());
+        model.addAttribute("status", ex.status());
+
+        return "error";
+    }
 
 }
