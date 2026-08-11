@@ -91,7 +91,6 @@
                         <input type="text"
                                class="game-name-input"
                                th:value="${game.name}">
-
                     </div>
 
                     <div class="edit-field">
@@ -102,8 +101,7 @@
 
                         <textarea class="game-description-input"
                                   th:text="${game.description}">
-                    </textarea>
-
+                        </textarea>
                     </div>
 
                     <div class="edit-field">
@@ -125,7 +123,6 @@
                         </label>
 
                         <div class="genre-list">
-
                             <label th:each="genre : ${genres}">
 
                                 <input type="checkbox"
@@ -133,17 +130,14 @@
                                        th:value="${genre.id}"
                                        th:checked="${game.genres.contains(genre)}">
 
-                                <span th:text="${genre.name}">
+                                <span th:text="${genre.name.toUpperCase()}">
                                 RPG
-                            </span>
-
+                                </span>
                             </label>
-
                         </div>
                     </div>
 
                     <div class="edit-field">
-
                         <label>
                             Platforms
                         </label>
@@ -159,10 +153,8 @@
 
                                 <span th:text="${platform.name}">
                                 PC
-                            </span>
-
+                                </span>
                             </label>
-
                         </div>
                     </div>
 
